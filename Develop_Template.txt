@@ -1,0 +1,5 @@
+1. VR Setting
+
+	* Interactable
+		- If accurate physics needed, set the interactable as 'Kinematic'. - Granades
+		- If accurate phisics not needed, set the interactable as 'Instantaneous'. - Guns.
