@@ -41,6 +41,10 @@ public class HandGun : MonoBehaviour
     [SerializeField]
     private XRController xrController;
 
+    //Magazine Mesh Section
+    [SerializeField]
+    private MeshRenderer magazineMesh;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -82,6 +86,20 @@ public class HandGun : MonoBehaviour
     public void Reload()
     {
         
+    }
+
+    public void InMagazine()
+    {
+        //Static Magazine Mesh to On
+        magazineMesh.gameObject.SetActive(true);
+        //Click sound
+        gunPlayer.PlayOneShot(outOfBullet, 1f);
+    }
+
+    public void OutMagazine()
+    {
+        //Static Magazine Mesh to Off
+        magazineMesh.gameObject.SetActive(false);
     }
 
     private void Update()
