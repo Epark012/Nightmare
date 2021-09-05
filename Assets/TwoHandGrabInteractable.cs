@@ -16,8 +16,8 @@ public class TwoHandGrabInteractable : XRGrabInteractable
     {
         foreach (var item in secondHandGrabPoints)
         {
-            item.onSelectEnter.AddListener(OnSecondHandGrab);
-            item.onSelectExit.AddListener(OnSecondHandRelease);
+            item.onSelectEntered.AddListener(OnSecondHandGrab);
+            item.onSelectExited.AddListener(OnSecondHandRelease);
         }
     }
 
