@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-
     [SerializeField]
     private float bulletSpeed = 15f;
 
     [SerializeField]
     private float lifeTime = 3;
+
+    [SerializeField]
+    private GameObject explosionVFX;
 
     private Rigidbody rigid;
     private Quaternion originRot;
@@ -44,15 +46,5 @@ public class Bullet : MonoBehaviour
         gameObject.transform.rotation = originRot;
         rigid.velocity = Vector3.zero;
         rigid.angularVelocity = Vector3.zero;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Bullet hit to " + other.gameObject.name);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Bullet hit to collision " + collision.gameObject.name);
     }
 }

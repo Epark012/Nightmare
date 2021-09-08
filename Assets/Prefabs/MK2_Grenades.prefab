@@ -254,7 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGrabbed: 0
   isActivated: 0
-  explosionVFX: {fileID: 6988207979154095750, guid: 7b57a337d09e2bd4da950d3a55a7a671,
+  explosionVFX: {fileID: 6560126604347435606, guid: 5379fda810a866848ae48c7a6bd82cca,
     type: 3}
   explosionSFX: {fileID: 8300000, guid: 0a0df30eb9577b343b02d9c5acae7ce4, type: 3}
   delayTime: 3

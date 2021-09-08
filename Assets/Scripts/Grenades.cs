@@ -54,7 +54,6 @@ public class Grenades : MonoBehaviour
     }
     private void Exploded()
     {
-        Debug.Log("in Exploded()");
         //VFX
         explosionVFX = Instantiate(explosionVFX, transform.position, explosionVFX.transform.rotation);
         Destroy(explosionVFX, 3f);
@@ -69,7 +68,6 @@ public class Grenades : MonoBehaviour
             if(rb != null)
             {
                 rb.AddExplosionForce(power, transform.position, radius);
-                Debug.Log(rb.gameObject.name);
             }
         }
 

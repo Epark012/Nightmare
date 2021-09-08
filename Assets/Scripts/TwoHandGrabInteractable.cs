@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class TwoHandGrabInteractable : XRGrabInteractable
@@ -11,6 +12,13 @@ public class TwoHandGrabInteractable : XRGrabInteractable
     public enum TwoHandRotationType { None, First, Second};
     public TwoHandRotationType twoHandRotationType;
 
+    private XRController xRController;
+    private HandGun gun;
+
+    bool secondaryButtonPressed;
+    bool hasReloaded = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,12 +27,14 @@ public class TwoHandGrabInteractable : XRGrabInteractable
             item.onSelectEntered.AddListener(OnSecondHandGrab);
             item.onSelectExited.AddListener(OnSecondHandRelease);
         }
+
+        gun = GetComponent<HandGun>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+      
     }
 
     public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
@@ -33,6 +43,17 @@ public class TwoHandGrabInteractable : XRGrabInteractable
         {
             //Compute the rotation
             selectingInteractor.attachTransform.rotation = GetTwoRotation();
+        }
+
+        if(xRController)
+        {
+            xRController.inputDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out secondaryButtonPressed);
+         
+            if(secondaryButtonPressed && !hasReloaded)
+            {
+                gun.Reload();
+                hasReloaded = true;
+            }
         }
         base.ProcessInteractable(updatePhase);
     }
@@ -72,12 +93,15 @@ public class TwoHandGrabInteractable : XRGrabInteractable
     protected override void OnSelectEntered(XRBaseInteractor interactor)
     {
         Debug.Log("FIrst Grab Enter");
+
+        xRController = interactor.GetComponent<XRController>();
     }
 
     protected override void OnSelectExited(XRBaseInteractor interactor)
     {
         Debug.Log("First Grab Enter");
         base.OnSelectExited(interactor);
+        xRController = null;
         secondInteractor = null;
     }
     public override bool IsSelectableBy(XRBaseInteractor interactor)
