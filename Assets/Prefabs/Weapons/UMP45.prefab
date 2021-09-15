@@ -149,8 +149,8 @@ VisualEffect:
   m_GameObject: {fileID: 1156688536188527788}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 140c6874b82b3424d9190eed0bb62d34, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_PropertySheet:
@@ -173,7 +173,10 @@ VisualEffect:
     m_Gradient:
       m_Array: []
     m_NamedObject:
-      m_Array: []
+      m_Array:
+      - m_Value: {fileID: 2800000, guid: c5a307276b57cb4469d6a5638b9b8a5d, type: 3}
+        m_Name: FirePointTexture
+        m_Overridden: 1
     m_Bool:
       m_Array: []
 --- !u!73398921 &4076262504540459311
@@ -936,39 +939,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e1579f0d0d3ab43ae74fb0d7506f26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
-  m_Colliders: []
-  m_InteractionLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_OnFirstHoverEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnHoverEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnHoverExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnLastHoverExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnSelectEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnSelectExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnSelectCanceled:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnActivate:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnDeactivate:
-    m_PersistentCalls:
-      m_Calls: []
-  m_CustomReticle: {fileID: 0}
   bulletType: 2
   bulletPrefab: {fileID: 4298216174591401386, guid: c7659c656f8995b46902aed41f5ba269,
     type: 3}

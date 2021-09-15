@@ -81,10 +81,6 @@ public class Grenades : MonoBehaviour
         Destroy(gameObject, 3f);
     }
 
-    public void Test()
-    {
-        Debug.Log("Test");
-    }
 
     public void ReleaseGrenades()
     {

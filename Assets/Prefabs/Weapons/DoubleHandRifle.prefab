@@ -715,8 +715,8 @@ VisualEffect:
   m_GameObject: {fileID: 7498367851168462544}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 140c6874b82b3424d9190eed0bb62d34, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_PropertySheet:
@@ -739,7 +739,10 @@ VisualEffect:
     m_Gradient:
       m_Array: []
     m_NamedObject:
-      m_Array: []
+      m_Array:
+      - m_Value: {fileID: 2800000, guid: c5a307276b57cb4469d6a5638b9b8a5d, type: 3}
+        m_Name: FirePointTexture
+        m_Overridden: 1
     m_Bool:
       m_Array: []
 --- !u!73398921 &7498367851168462546

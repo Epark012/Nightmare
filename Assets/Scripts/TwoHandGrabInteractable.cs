@@ -13,7 +13,7 @@ public class TwoHandGrabInteractable : XRGrabInteractable
     public TwoHandRotationType twoHandRotationType;
 
     private XRController xRController;
-    private HandGun gun;
+    private Weapon gun;
 
     bool secondaryButtonPressed;
     bool hasReloaded = false;
@@ -28,7 +28,7 @@ public class TwoHandGrabInteractable : XRGrabInteractable
             item.onSelectExited.AddListener(OnSecondHandRelease);
         }
 
-        gun = GetComponent<HandGun>();
+        gun = GetComponent<Weapon>();
     }
 
     // Update is called once per frame

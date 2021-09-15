@@ -2,24 +2,19 @@
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.VFX;
 
-public class HandGun : Weapon
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
+public class RocketLauncher : Weapon
 {
-    [Header("Ammo Section")]
-    public BulletType bulletType;
-    [SerializeField]
-    private GameObject bulletPrefab;
-    [SerializeField]
-    private int bulletDamage = 1;
+    [Header("Rocket Section")]
     [SerializeField]
     private Transform firePoint;
-    private int currentBullet;
     private Animator animator;
 
     #region Gun Logic
-    private AmmoManager ammoManager;
-    private bool inMagazine = false;
+    private bool inRocket = false;
     private bool isLoaded = false;
-    private SocketInteractorTag socket;
+    private XRSocketInteractor socket;
     #endregion
 
     #region VFX Property
@@ -47,49 +42,24 @@ public class HandGun : Weapon
 
     //Magazine Mesh Section
     [SerializeField]
-    private MeshRenderer magazineMesh;
-
-    [SerializeField]
-    private int rayDistance;
-
-    public int Bullet  { get { return  currentBullet; }
-                            set { currentBullet = value; } }
+    private MeshRenderer rocketMesh;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = this.GetComponent<Animator>();
         gunAudioPlayer = GetComponent<AudioSource>();
-        ammoManager = FindObjectOfType<AmmoManager>();
-        socket = GetComponentInChildren<SocketInteractorTag>();
+        socket = GetComponentInChildren<XRSocketInteractor>();
 
         //Find XR Base Interactable for haptic
         xRBaseInteractable = GetComponent<XRBaseInteractable>();
         xRBaseInteractable.onSelectEntered.AddListener(OnGrab);
         xRBaseInteractable.onSelectExited.AddListener(OnRelease);
-
-        //Check Initial Loaded
-        if(CheckInitialLoaded())
-        {
-            inMagazine = true;
-            isLoaded = true;
-        }
-    }
-
-
-    private bool CheckInitialLoaded()
-    {
-        return socket.startingSelectedInteractable;
-    }
-
-    public void SetInterator(XRBaseInteractor interactor)
-    {
-
     }
 
     public void Fire()
     {
-        if(Bullet >= 1 && isLoaded)
+        if (isLoaded)
         {
             animator.SetTrigger("Fire");
         }
@@ -103,24 +73,16 @@ public class HandGun : Weapon
 
     public void FireAnimation()
     {
-        //Decrease a bullet
-        Bullet--;
-        //Fire Bullet
-        ammoManager.FireBullet(firePoint.position, firePoint.rotation, bulletType);
+        //OutRocket
+        OutRocket();
 
-        //Raycast
-        RaycastHit ray;
-        if(Physics.Raycast(firePoint.position, firePoint.transform.TransformDirection(Vector3.forward), out ray, rayDistance))
-        {
-            if(ray.rigidbody)
-            {
-                Debug.Log(ray.transform.name);
-                ShootingTarget target = ray.transform.GetComponent<ShootingTarget>();
-                if (target != null)
-                    target.TakeDamage(bulletDamage);
-                ray.rigidbody.AddForceAtPosition(firePoint.transform.TransformDirection(Vector3.forward) * 200 * bulletDamage, ray.point);
-            }
-        }
+        //Turn Off Socket Active 
+        socket.socketActive = false;
+
+        //Turn On Missile
+        socket.selectTarget.GetComponent<Rocket>().isActivated = true;
+
+        socket.selectTarget.GetComponent<MeshRenderer>().enabled = true;
 
         //Audio
         gunAudioPlayer.PlayOneShot(fire, 1.0f);
@@ -133,7 +95,7 @@ public class HandGun : Weapon
     public override void Reload()
     {
         //Check Magazine In
-        if(inMagazine)
+        if (inRocket)
         {
             //Relaod
             isLoaded = true;
@@ -155,29 +117,25 @@ public class HandGun : Weapon
     {
         xrController = null;
     }
-    public void InMagazine()
+    public void InRocket()
     {
         //Magazine in
-        inMagazine = true;
-        //Check BulletCounts in the magazine
-        Bullet = socket.BulletCount;
+        inRocket = true;
         //Is Loaded Yet, have to slide
         isLoaded = false;
         //Static Magazine Mesh to On
-        magazineMesh.gameObject.SetActive(true);
+        rocketMesh.gameObject.SetActive(true);
         //Click sound
         gunAudioPlayer.PlayOneShot(outOfBullet, 1f);
     }
 
-    public void OutMagazine()
+    public void OutRocket()
     {
         //Magazine Out
-        inMagazine = false;
+        inRocket = false;
         //Loaded False Check
         isLoaded = false;
         //Static Magazine Mesh to Off
-        magazineMesh.gameObject.SetActive(false);
-        //Update Magazine Current Bullet
-        socket.BulletCount = Bullet;
+        rocketMesh.gameObject.SetActive(false);
     }
 }
