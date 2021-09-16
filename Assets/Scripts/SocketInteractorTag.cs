@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class SocketInteractorTag : XRSocketInteractor
+public class SocketInteractorTag : WeaponSocketInteractor
 {
     [SerializeField]
     private BulletType bulletType;
@@ -12,7 +12,7 @@ public class SocketInteractorTag : XRSocketInteractor
 
     public int BulletCount { get { return bulletCount; } set { bulletCount = value; } }
 
-    private bool IsCompatiable(XRBaseInteractable interactable)
+    protected override bool IsCompatiable(XRBaseInteractable interactable)
     {
         if (interactable.GetComponent<Magazine>())
         {

@@ -9,6 +9,21 @@ public enum BulletType
     UMP45 = 2
 }
 
+public enum RocketLauncherType
+{
+    RPG_7 = 0,
+    Test = 1
+}
+
+public enum ID
+{
+    Slot1 = 0,
+    Slot2 = 1,
+    Slot3 = 2,
+    Slot4 = 3
+}
+
+
 public class AmmoManager : MonoBehaviour
 {
     public List<AmmoData> ammoDatas = new List<AmmoData>();

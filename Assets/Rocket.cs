@@ -8,30 +8,33 @@ using UnityEngine;
 public class Rocket : MonoBehaviour
 {
     public bool isActivated = false;
+    public RocketLauncherType rocketLauncherType;
+    public ID id;
 
+    #region Rocket Properties
     [SerializeField]
     private float rocketSpeed = 150f;
-
     [SerializeField]
     private float power = 30f;
-
     [SerializeField]
     private float radius = 3f;
-
     [SerializeField]
     private float count = 3;
-
+    #endregion
+    #region VFX & SFX 
     [SerializeField]
     private GameObject explosionVFX;
     [SerializeField]
     private ParticleSystem smokeVFX;
     [SerializeField]
     private AudioClip explosionSFX;
-
+    #endregion
+    #region Basic Logic
     private Rigidbody rigid;
     private AudioSource audioSource;
     private MeshRenderer mesh;
     private bool hasExploded = false;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -64,11 +67,11 @@ public class Rocket : MonoBehaviour
 
     private void Explode()
     {
-        Debug.Log("Rocket Test");
         //VFX
         explosionVFX = Instantiate(explosionVFX, transform.position, explosionVFX.transform.rotation);
         Destroy(explosionVFX, 3f);
         GetComponent<BoxCollider>().enabled = false;
+        smokeVFX.Stop();
 
         //Sound
         audioSource.PlayOneShot(explosionSFX, 1.0f);
@@ -96,7 +99,6 @@ public class Rocket : MonoBehaviour
     {
         if(isActivated)
         {
-            Debug.Log("Rocket Hit to " + collision.transform.name);
             Explode();
         }
     }

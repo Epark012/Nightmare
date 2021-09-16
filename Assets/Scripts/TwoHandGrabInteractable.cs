@@ -111,4 +111,9 @@ public class TwoHandGrabInteractable : XRGrabInteractable
         Debug.Log("interactor : " + interactor);
         return base.IsSelectableBy(interactor) && !isAlreadyGrabbed;
     }
+
+    public void ReleaseFire()
+    {
+        hasReloaded = false;
+    }
 }

@@ -385,6 +385,7 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
+  rocketLauncherType: 0
 --- !u!1 &3034318704095475853
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,6 +575,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4809160324236837402}
+        m_MethodName: ReleaseFire
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
@@ -611,7 +623,7 @@ MonoBehaviour:
   m_GravityOnDetach: 0
   m_RetainTransformParent: 1
   secondHandGrabPoints: []
-  twoHandRotationType: 0
+  twoHandRotationType: 2
 --- !u!95 &4809160324236837401
 Animator:
   serializedVersion: 3
@@ -740,6 +752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 3034318704095475854}
+  rocketLauncherType: 0
   fuzzle: {fileID: 676784511005795624}
   fire: {fileID: 8300000, guid: 1a4321a625a14f5419c572509d315071, type: 3}
   outOfBullet: {fileID: 8300000, guid: ff69d9b5c29c57a4aa6d2fb63a2093cf, type: 3}

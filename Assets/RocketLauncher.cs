@@ -10,11 +10,12 @@ public class RocketLauncher : Weapon
     [SerializeField]
     private Transform firePoint;
     private Animator animator;
+    public RocketLauncherType rocketLauncherType;
 
     #region Gun Logic
     private bool inRocket = false;
     private bool isLoaded = false;
-    private XRSocketInteractor socket;
+    private WeaponSocketInteractor socket;
     #endregion
 
     #region VFX Property
@@ -49,7 +50,7 @@ public class RocketLauncher : Weapon
     {
         animator = this.GetComponent<Animator>();
         gunAudioPlayer = GetComponent<AudioSource>();
-        socket = GetComponentInChildren<XRSocketInteractor>();
+        socket = GetComponentInChildren<WeaponSocketInteractor>();
 
         //Find XR Base Interactable for haptic
         xRBaseInteractable = GetComponent<XRBaseInteractable>();
@@ -76,13 +77,11 @@ public class RocketLauncher : Weapon
         //OutRocket
         OutRocket();
 
-        //Turn Off Socket Active 
-        socket.socketActive = false;
+        //Socket Part
+        socket.ReleaseFire();
 
-        //Turn On Missile
-        socket.selectTarget.GetComponent<Rocket>().isActivated = true;
+        //Set off hasActivated at interactable.
 
-        socket.selectTarget.GetComponent<MeshRenderer>().enabled = true;
 
         //Audio
         gunAudioPlayer.PlayOneShot(fire, 1.0f);
