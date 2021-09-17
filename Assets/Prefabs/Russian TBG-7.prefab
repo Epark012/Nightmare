@@ -201,7 +201,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -257,13 +257,13 @@ MonoBehaviour:
   rocketLauncherType: 0
   id: 1
   rocketSpeed: 75
-  power: 30
+  power: 1000
   radius: 3
   count: 5
   explosionVFX: {fileID: 6560126604347435606, guid: 5379fda810a866848ae48c7a6bd82cca,
     type: 3}
   smokeVFX: {fileID: 8530208113517170516}
-  explosionSFX: {fileID: 8300000, guid: 74c85d1db898ec64186756335fcdf67c, type: 3}
+  explosionSFX: {fileID: 8300000, guid: a0b4a08b289b019458e1827cfc2bce27, type: 3}
 --- !u!114 &1957203636484977184
 MonoBehaviour:
   m_ObjectHideFlags: 0

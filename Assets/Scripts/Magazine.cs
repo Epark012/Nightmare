@@ -11,6 +11,12 @@ public class Magazine : MonoBehaviour
 
     public int currentBullet;
 
+    private BoxCollider boxCollider;
+    private void Awake()
+    {
+        boxCollider = GetComponent<BoxCollider>();
+    }
+
     public Magazine()
     {
         currentBullet = bulletCapacity;
@@ -21,8 +27,18 @@ public class Magazine : MonoBehaviour
         return bulletType;
     }
 
-    /*
-    - Reload - 
-    - turn off rigidbidy for dropping
-     */
+    public void InMagazine()
+    {
+        //boxCollider.enabled = false;
+    }
+
+    public void OutMagazine()
+    {
+        //boxCollider.enabled = true;
+    }
+
+    public void ReleaseMagazine()
+    {
+        boxCollider.enabled = true;
+    }
 }

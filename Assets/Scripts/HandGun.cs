@@ -19,7 +19,8 @@ public class HandGun : Weapon
     private AmmoManager ammoManager;
     private bool inMagazine = false;
     private bool isLoaded = false;
-    private SocketInteractorTag socket;
+    private GunSocketInteractor socket;
+    private OnTargetReached slider;
     #endregion
 
     #region VFX Property
@@ -37,6 +38,8 @@ public class HandGun : Weapon
     private AudioClip outOfBullet;
     [SerializeField]
     private AudioClip slide;
+    [SerializeField]
+    private AudioClip inSocket;
     #endregion
 
     #region XR Controller
@@ -61,7 +64,8 @@ public class HandGun : Weapon
         animator = this.GetComponent<Animator>();
         gunAudioPlayer = GetComponent<AudioSource>();
         ammoManager = FindObjectOfType<AmmoManager>();
-        socket = GetComponentInChildren<SocketInteractorTag>();
+        socket = GetComponentInChildren<GunSocketInteractor>();
+        slider = GetComponentInChildren<OnTargetReached>();
 
         //Find XR Base Interactable for haptic
         xRBaseInteractable = GetComponent<XRBaseInteractable>();
@@ -92,6 +96,8 @@ public class HandGun : Weapon
         if(Bullet >= 1 && isLoaded)
         {
             animator.SetTrigger("Fire");
+            if (Bullet == 0)
+                slider.SliderLoaded = false;
         }
         else
         {
@@ -166,7 +172,7 @@ public class HandGun : Weapon
         //Static Magazine Mesh to On
         magazineMesh.gameObject.SetActive(true);
         //Click sound
-        gunAudioPlayer.PlayOneShot(outOfBullet, 1f);
+        gunAudioPlayer.PlayOneShot(inSocket, 1f);
     }
 
     public void OutMagazine()
@@ -179,5 +185,11 @@ public class HandGun : Weapon
         magazineMesh.gameObject.SetActive(false);
         //Update Magazine Current Bullet
         socket.BulletCount = Bullet;
+    }
+
+    //Called by Interactor
+    public override void ReleaseMagazine()
+    {
+        socket.MagazineOut();
     }
 }

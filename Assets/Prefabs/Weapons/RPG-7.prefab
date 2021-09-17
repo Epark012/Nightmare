@@ -753,11 +753,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 3034318704095475854}
   rocketLauncherType: 0
+  rocketIndex: 0
   fuzzle: {fileID: 676784511005795624}
-  fire: {fileID: 8300000, guid: 1a4321a625a14f5419c572509d315071, type: 3}
+  fire: {fileID: 8300000, guid: e7d4da1e3e2988e49bd6c015c8740169, type: 3}
   outOfBullet: {fileID: 8300000, guid: ff69d9b5c29c57a4aa6d2fb63a2093cf, type: 3}
-  slide: {fileID: 8300000, guid: 2309112fd8f5f02499856ee674e97a65, type: 3}
-  rocketMesh: {fileID: 5260910793002453572}
+  slide: {fileID: 8300000, guid: 6d091d8d268038a46955b5482df1f8e1, type: 3}
+  inSocket: {fileID: 8300000, guid: 6d091d8d268038a46955b5482df1f8e1, type: 3}
+  rocketMesh:
+  - {fileID: 5260910793002453572}
+  - {fileID: 4333166565568845815}
 --- !u!1 &5197119570445911970
 GameObject:
   m_ObjectHideFlags: 0

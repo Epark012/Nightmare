@@ -2,8 +2,6 @@
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.VFX;
 
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(AudioSource))]
 public class RocketLauncher : Weapon
 {
     [Header("Rocket Section")]
@@ -11,6 +9,9 @@ public class RocketLauncher : Weapon
     private Transform firePoint;
     private Animator animator;
     public RocketLauncherType rocketLauncherType;
+
+    private int rocketIndex = 0;
+    public int RocketIndex { get { return rocketIndex; } set { rocketIndex = value; } }
 
     #region Gun Logic
     private bool inRocket = false;
@@ -33,6 +34,8 @@ public class RocketLauncher : Weapon
     private AudioClip outOfBullet;
     [SerializeField]
     private AudioClip slide;
+    [SerializeField]
+    private AudioClip inSocket;
     #endregion
 
     #region XR Controller
@@ -43,7 +46,7 @@ public class RocketLauncher : Weapon
 
     //Magazine Mesh Section
     [SerializeField]
-    private MeshRenderer rocketMesh;
+    private MeshRenderer[] rocketMesh;
 
     // Start is called before the first frame update
     void Start()
@@ -123,9 +126,9 @@ public class RocketLauncher : Weapon
         //Is Loaded Yet, have to slide
         isLoaded = false;
         //Static Magazine Mesh to On
-        rocketMesh.gameObject.SetActive(true);
+        rocketMesh[rocketIndex].gameObject.SetActive(true);
         //Click sound
-        gunAudioPlayer.PlayOneShot(outOfBullet, 1f);
+        gunAudioPlayer.PlayOneShot(inSocket, 1f);
     }
 
     public void OutRocket()
@@ -135,6 +138,7 @@ public class RocketLauncher : Weapon
         //Loaded False Check
         isLoaded = false;
         //Static Magazine Mesh to Off
-        rocketMesh.gameObject.SetActive(false);
+        rocketMesh[rocketIndex].gameObject.SetActive(false);
+        rocketIndex = 0;
     }
 }

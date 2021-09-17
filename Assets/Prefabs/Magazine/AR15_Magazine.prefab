@@ -43,8 +43,8 @@ GameObject:
   - component: {fileID: 6542617617561760139}
   - component: {fileID: 6542617617561760138}
   - component: {fileID: 6542617617561760141}
-  - component: {fileID: 6542617617561760140}
   - component: {fileID: 7900889406330601729}
+  - component: {fileID: 1265235811450903024}
   m_Layer: 11
   m_Name: AR15_Magazine
   m_TagString: Magazine
@@ -143,7 +143,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6542617617561760140
+--- !u!114 &7900889406330601729
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,12 +152,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 6542617617561760143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: b5bc3249f39c34042a951113a4c0cea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletCapacity: 30
+  bulletType: 1
+  currentBullet: 30
+--- !u!114 &1265235811450903024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6542617617561760143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a82b563ef033a0418fb2bc463bb32c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
-  m_Colliders:
-  - {fileID: 6542617617561760138}
+  m_Colliders: []
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -221,18 +235,3 @@ MonoBehaviour:
   m_ThrowAngularVelocityScale: 1
   m_GravityOnDetach: 0
   m_RetainTransformParent: 1
---- !u!114 &7900889406330601729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6542617617561760143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5bc3249f39c34042a951113a4c0cea4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletCapacity: 30
-  bulletType: 1
-  currentBullet: 30

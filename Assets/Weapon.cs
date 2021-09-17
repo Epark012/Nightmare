@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public class Weapon : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -17,6 +19,11 @@ public class Weapon : MonoBehaviour
     }
 
     public virtual void Reload()
+    {
+
+    }
+
+    public virtual void ReleaseMagazine()
     {
 
     }

@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 3617862363868609940}
   - component: {fileID: 3617862363868609941}
   - component: {fileID: 3617862363868609942}
-  - component: {fileID: 3617862363868609943}
+  - component: {fileID: 4081990958673333413}
   m_Layer: 9
   m_Name: SIG Sauer P220
   m_TagString: Untagged
@@ -340,6 +340,7 @@ MonoBehaviour:
   fire: {fileID: 8300000, guid: 1a4321a625a14f5419c572509d315071, type: 3}
   outOfBullet: {fileID: 8300000, guid: ff69d9b5c29c57a4aa6d2fb63a2093cf, type: 3}
   slide: {fileID: 8300000, guid: 2309112fd8f5f02499856ee674e97a65, type: 3}
+  inSocket: {fileID: 0}
   magazineMesh: {fileID: 8532726534417962894}
   rayDistance: 0
 --- !u!82 &3617862363868609940
@@ -473,7 +474,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3617862363868609943
+--- !u!114 &4081990958673333413
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -482,7 +483,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3617862363868609944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: e966e63067d0c8740aca1f7ccdabe0de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -553,7 +554,7 @@ MonoBehaviour:
       m_Calls: []
   m_CustomReticle: {fileID: 0}
   m_AttachTransform: {fileID: 8371681931826671459}
-  m_AttachEaseInTime: 0.05
+  m_AttachEaseInTime: 0.15
   m_MovementType: 1
   m_TrackPosition: 1
   m_SmoothPosition: 0
@@ -584,6 +585,9 @@ MonoBehaviour:
   m_ThrowAngularVelocityScale: 1
   m_GravityOnDetach: 0
   m_RetainTransformParent: 1
+  OnButtonClicked:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3698004406124763983
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,7 +995,7 @@ BoxCollider:
   m_GameObject: {fileID: 6745904360808481799}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.0015633145, y: 0.00028649636, z: 0.00025487208}
   m_Center: {x: 0.0003679293, y: 0.00030878824, z: 6.839399e-10}
@@ -1116,6 +1120,7 @@ MonoBehaviour:
   m_ThrowAngularVelocityScale: 1
   m_GravityOnDetach: 0
   m_RetainTransformParent: 1
+  baseInteractable: {fileID: 0}
 --- !u!54 &4250260809281988743
 Rigidbody:
   m_ObjectHideFlags: 0

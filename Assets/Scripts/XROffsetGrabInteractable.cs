@@ -8,9 +8,12 @@ public class XROffsetGrabInteractable : XRGrabInteractable
     private Vector3 initialAttachLocalPos;
     private Quaternion initialAttachLocalRot;
 
+    [SerializeField]
+    private OneHandGrabInteractable oneHandGrab;
     // Start is called before the first frame update
     void Start()
     {
+        oneHandGrab = GetComponentInParent<OneHandGrabInteractable>();
         //Create attach point
         if (!attachTransform)
         {
@@ -37,5 +40,12 @@ public class XROffsetGrabInteractable : XRGrabInteractable
         }
 
         base.OnSelectEntered(interactor);
+    }
+
+    //Determines if this interactable can be selected by interactor
+    //Slider, OffsetGrabInteractable has to be activated when first grab is IsSelected True
+    public override bool IsSelectableBy(XRBaseInteractor interactor)
+    {
+        return (base.IsSelectableBy(interactor) && oneHandGrab.isSelected);
     }
 }

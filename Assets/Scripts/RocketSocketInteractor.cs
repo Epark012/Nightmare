@@ -16,6 +16,11 @@ public class RocketSocketInteractor : WeaponSocketInteractor
     [SerializeField]
     private RocketLauncherType rocketLauncherType;
 
+    protected override void Awake()
+    {
+        rocketLauncher = GetComponentInParent<RocketLauncher>();
+        base.Awake();
+    }
     protected override bool IsCompatiable(XRBaseInteractable interactable)
     {
         if (interactable.GetComponent<Rocket>())
@@ -33,34 +38,17 @@ public class RocketSocketInteractor : WeaponSocketInteractor
     }
     protected override void OnSelectEntered(XRBaseInteractable interactable)
     {
-        rocketLauncher = GetComponentInParent<RocketLauncher>();
+        //rocketLauncher = GetComponentInParent<RocketLauncher>();
+        rocketLauncher.RocketIndex = (int)interactable.GetComponent<Rocket>().id;
 
-        InRocket(interactable);
         base.OnSelectEntered(interactable);
-    }
-
-    void InRocket(XRBaseInteractable interactable)
-    {
-        //1. Set the mesh from interactable.
-        mesh = interactable.GetComponent<MeshRenderer>();
-        //2. Turn off Mesh
-        mesh.enabled = false;
-        //3. Tell Launcher which mesh need to be off.
     }
 
     protected override void OnSelectExited(XRBaseInteractable interactable)
     {
-        rocketLauncher = null;
-        //OutRocket(interactable);
+        //rocketLauncher = null;
+        rocketLauncher.RocketIndex = 0;
         base.OnSelectExited(interactable);
-    }
-
-    void OutRocket(XRBaseInteractable interactable)
-    {
-        //Turn on Mesh.
-        mesh.enabled = true;
-        //mesh to Null.
-        mesh = null;
     }
 
     public override void ReleaseFire()

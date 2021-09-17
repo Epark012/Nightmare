@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(OffPinGrabInteractable))]
 public class Grenades : MonoBehaviour
 {
-    [SerializeField]
-    private bool isGrabbed = false;
-    [SerializeField]
+   
     private bool isActivated = false;
+    public bool IsActivated { get { return IsActivated; } set { isActivated = value; } }
 
     [SerializeField]
     private GameObject explosionVFX;
@@ -27,22 +29,19 @@ public class Grenades : MonoBehaviour
     private float count;
     private bool hasExploded = false;
     private AudioSource audioSource;
-    private MeshRenderer[] meshRenderers = new MeshRenderer[2];
+    private MeshRenderer meshRenderer;
     // Start is called before the first frame update
     void Start()
     {
         count = delayTime;
         audioSource = GetComponent<AudioSource>();
-        for (int i = 0; i < meshRenderers.Length; i++)
-        {
-            meshRenderers[i] = gameObject.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>();
-        }
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(isActivated && !isGrabbed)
+        if(isActivated && !hasExploded)
         {
             count -= Time.deltaTime;
             if (count <= 0f && !hasExploded)
@@ -70,20 +69,7 @@ public class Grenades : MonoBehaviour
                 rb.AddExplosionForce(power, transform.position, radius);
             }
         }
-
-        //Destory
-        //Turn off Mesh Renderers in [0] - Mesh for a Grenade, [1] for Pin
-        foreach (var mesh in meshRenderers)
-        {
-            mesh.enabled = false;
-        }
-        //Destroy Grenades
-        Destroy(gameObject, 3f);
-    }
-
-
-    public void ReleaseGrenades()
-    {
-        isActivated = true;
+        meshRenderer.enabled = false;
+        Destroy(gameObject, delayTime);
     }
 }

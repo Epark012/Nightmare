@@ -5,7 +5,8 @@ using UnityEngine.Events;
 
 public class OnTargetReached : MonoBehaviour
 {
-    private bool wasReached = false;
+    private bool sliderLoaded = false;
+    public bool SliderLoaded { get { return sliderLoaded;} set { sliderLoaded = value; } } 
 
     public float threshold = 0.02f;
     public Transform target;
@@ -19,16 +20,16 @@ public class OnTargetReached : MonoBehaviour
     {
         distance = Vector3.Distance(transform.position, target.position);
 
-        if(distance < threshold && !wasReached)
+        if(distance < threshold && !sliderLoaded)
         {
             //Reached the target
             OnReached.Invoke();
-            wasReached = true;
+            sliderLoaded = true;
         }
 
         else if (distance >= threshold)
         {
-            wasReached = false;
+            sliderLoaded = false;
         }
     }
 }
