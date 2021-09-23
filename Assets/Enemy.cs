@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyState
+{ 
+    Idle,
+    DataDigging,
+    Patrolling,
+    Attacking
+}
+
 /// <summary>
 /// A base script for enemies. 
 /// 1. Patroller - Find precious memories.  
@@ -20,10 +28,12 @@ public class Enemy : MonoBehaviour
     protected int enemyHP;
     [SerializeField]
     private float radarDistance;
+    public EnemyState state;
     #endregion
 
     protected Animator animator;
     protected AudioSource audioSource;
+
 
     private void Start()
     {
