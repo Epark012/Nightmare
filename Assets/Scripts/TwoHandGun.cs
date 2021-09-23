@@ -2,7 +2,7 @@
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.VFX;
 
-public class HandGun : Weapon
+public class TwoHandGun : Weapon
 {
     [Header("Ammo Section")]
     public BulletType bulletType;
@@ -54,7 +54,6 @@ public class HandGun : Weapon
     [SerializeField]
     private int rayDistance;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -89,7 +88,7 @@ public class HandGun : Weapon
 
     public void Fire()
     {
-        if(Bullet >= 1 && isLoaded)
+        if (Bullet >= 1 && isLoaded)
         {
             animator.SetTrigger("Fire");
             if (Bullet == 0)
@@ -112,9 +111,9 @@ public class HandGun : Weapon
 
         //Raycast
         RaycastHit ray;
-        if(Physics.Raycast(firePoint.position, firePoint.transform.TransformDirection(Vector3.forward), out ray, rayDistance))
+        if (Physics.Raycast(firePoint.position, firePoint.transform.TransformDirection(Vector3.forward), out ray, rayDistance))
         {
-            if(ray.rigidbody)
+            if (ray.rigidbody)
             {
                 Debug.Log(ray.transform.name);
                 ShootingTarget target = ray.transform.GetComponent<ShootingTarget>();
@@ -135,7 +134,7 @@ public class HandGun : Weapon
     public override void Reload()
     {
         //Check Magazine In
-        if(inMagazine)
+        if (inMagazine)
         {
             //Relaod
             isLoaded = true;
@@ -162,7 +161,7 @@ public class HandGun : Weapon
         //Magazine in
         inMagazine = true;
         //Check BulletCounts in the magazine
-        //Bullet = socket.BulletCount;
+        Bullet = socket.BulletCount;
         //Is Loaded Yet, have to slide
         isLoaded = false;
         //Static Magazine Mesh to On
@@ -170,7 +169,7 @@ public class HandGun : Weapon
         //Click sound
         gunAudioPlayer.PlayOneShot(inSocket, 1f);
     }
-
+    
     public override void OutMagazine(XRBaseInteractable interactable)
     {
         //Magazine Out
@@ -180,12 +179,15 @@ public class HandGun : Weapon
         //Static Magazine Mesh to Off
         magazineMesh.enabled = false;
         //Update Magazine Current Bullet
-        //socket.BulletCount = Bullet;
+        socket.BulletCount = Bullet;
     }
 
     //Called by Interactor
     public override void ReleaseMagazine()
     {
-        socket.MagazineOut();
+        //Needs to be fixed
+        /*WeaponAccessoryInteractable socketMagazine = (WeaponAccessoryInteractable)socket.selectTarget;
+        if (!socketMagazine)
+            socketMagazine.IsEquipped = false;*/
     }
 }

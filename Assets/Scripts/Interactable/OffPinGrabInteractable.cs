@@ -27,7 +27,7 @@ public class OffPinGrabInteractable : XRGrabInteractable
             isPinned = true;
             pinMesh.enabled = true;
         }
-        socket.onSelectEntered.AddListener(InPin);
+        socket.onSelectEntered.AddListener(InPin); 
         socket.onSelectExited.AddListener(OffPin);
     }
 

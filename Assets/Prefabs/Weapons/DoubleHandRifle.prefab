@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 806471032877463199}
   - component: {fileID: 34614332067015719}
   - component: {fileID: 34614332067015713}
-  - component: {fileID: 34614332067015718}
   - component: {fileID: 34614332067015716}
   - component: {fileID: 7650157457940000960}
+  - component: {fileID: 3807104586511801604}
   m_Layer: 9
   m_Name: DoubleHandRifle
   m_TagString: Untagged
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_OnActivate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 34614332067015718}
+      - m_Target: {fileID: 3807104586511801604}
         m_MethodName: Fire
         m_Mode: 1
         m_Arguments:
@@ -153,30 +153,6 @@ MonoBehaviour:
   - {fileID: 7498367851071695992}
   - {fileID: 7498367852248320470}
   twoHandRotationType: 0
---- !u!114 &34614332067015718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 34614332067015717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9e1579f0d0d3ab43ae74fb0d7506f26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletType: 1
-  bulletPrefab: {fileID: 1796375454871240309, guid: 4c4d77ea712ed9242b73635dc45faca6,
-    type: 3}
-  bulletDamage: 1
-  firePoint: {fileID: 2260675860006134442}
-  fuzzle: {fileID: 7498367851168462557}
-  fire: {fileID: 8300000, guid: a3e29f41f6528a8449b639aae686cbdc, type: 3}
-  outOfBullet: {fileID: 8300000, guid: ff69d9b5c29c57a4aa6d2fb63a2093cf, type: 3}
-  slide: {fileID: 8300000, guid: 2309112fd8f5f02499856ee674e97a65, type: 3}
-  inSocket: {fileID: 0}
-  magazineMesh: {fileID: 4910496689020798515}
-  rayDistance: 10
 --- !u!82 &34614332067015716
 AudioSource:
   m_ObjectHideFlags: 0
@@ -292,6 +268,30 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3807104586511801604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34614332067015717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2af303ed1b140524bab5edae58a2d7f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletType: 1
+  bulletPrefab: {fileID: 1796375454871240309, guid: 4c4d77ea712ed9242b73635dc45faca6,
+    type: 3}
+  bulletDamage: 2
+  firePoint: {fileID: 2260675860006134442}
+  fuzzle: {fileID: 7498367851168462557}
+  fire: {fileID: 8300000, guid: a3e29f41f6528a8449b639aae686cbdc, type: 3}
+  outOfBullet: {fileID: 8300000, guid: ff69d9b5c29c57a4aa6d2fb63a2093cf, type: 3}
+  slide: {fileID: 8300000, guid: 2309112fd8f5f02499856ee674e97a65, type: 3}
+  inSocket: {fileID: 0}
+  magazineMesh: {fileID: 4910496689020798515}
+  rayDistance: 10
 --- !u!1 &318202403712906524
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,7 +403,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5323885100493449276
 Transform:
   m_ObjectHideFlags: 0
@@ -433,7 +433,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2410848256129519628}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -536,32 +536,10 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelectEntered:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 34614332067015718}
-        m_MethodName: InMagazine
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_OnSelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 34614332067015718}
-        m_MethodName: OutMagazine
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_ShowInteractableHoverMeshes: 1
   m_InteractableHoverMeshMaterial: {fileID: 0}
   m_InteractableCantHoverMeshMaterial: {fileID: 0}
@@ -833,8 +811,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.64894265, y: 1, z: 1}
+  m_Center: {x: -0.17552757, y: 0, z: -0.0000000014079982}
 --- !u!54 &7498367852248320465
 Rigidbody:
   m_ObjectHideFlags: 0

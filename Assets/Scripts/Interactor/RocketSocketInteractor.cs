@@ -46,7 +46,6 @@ public class RocketSocketInteractor : WeaponSocketInteractor
 
     protected override void OnSelectExited(XRBaseInteractable interactable)
     {
-        //rocketLauncher = null;
         rocketLauncher.RocketIndex = 0;
         base.OnSelectExited(interactable);
     }

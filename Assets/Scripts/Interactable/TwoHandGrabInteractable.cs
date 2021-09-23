@@ -33,22 +33,31 @@ public class TwoHandGrabInteractable : XRGrabInteractable
 
     public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
     {
+        //Compute Rotation with two interactors.
         if(secondInteractor && selectingInteractor)
         {
             //Compute the rotation
             selectingInteractor.attachTransform.rotation = GetTwoRotation();
         }
 
+        //Reload Logic.
         if(xRController)
         {
             xRController.inputDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out secondaryButtonPressed);
-         
-            if(secondaryButtonPressed && !hasReloaded)
+            if(secondaryButtonPressed)
             {
-                weapon.Reload();
-                hasReloaded = true;
+                //Reload Logic
+                if(secondaryButtonPressed && !hasReloaded)
+                {
+                    weapon.Reload();
+                    hasReloaded = true;
+                }
+
+                //Release Magazine Logic -> Hold Button to make the magazine grabbable
+                //weapon.ReleaseMagazine();
             }
         }
+
         base.ProcessInteractable(updatePhase);
     }
 
@@ -101,8 +110,6 @@ public class TwoHandGrabInteractable : XRGrabInteractable
     public override bool IsSelectableBy(XRBaseInteractor interactor)
     {
         bool isAlreadyGrabbed = selectingInteractor && !interactor.Equals(selectingInteractor);
-        Debug.Log("selectingInteractor : " + selectingInteractor);
-        Debug.Log("interactor : " + interactor);
         return base.IsSelectableBy(interactor) && !isAlreadyGrabbed;
     }
 

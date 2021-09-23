@@ -8,7 +8,6 @@ public class GunSocketInteractor : WeaponSocketInteractor
     [SerializeField]
     private BulletType bulletType;
 
-    private int bulletCount;
     public int BulletCount { get { return bulletCount; } set { bulletCount = value; } }
 
 
@@ -35,7 +34,9 @@ public class GunSocketInteractor : WeaponSocketInteractor
             BulletCount = interactable.GetComponent<Magazine>().currentBullet;
 
         //Make ungrabbable
-        interactable.GetComponent<WeaponAccessoryInteractable>().IsEquipped = true;
+        WeaponAccessoryInteractable weaponAccessory = GetComponent<WeaponAccessoryInteractable>();
+        if (weaponAccessory)
+            weaponAccessory.IsEquipped = true;
 
         base.OnSelectEntered(interactable);
     }

@@ -32,4 +32,9 @@ public class OnTargetReached : MonoBehaviour
             sliderLoaded = false;
         }
     }
+
+    private void OnDisable()
+    {
+        sliderLoaded = false;
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingTarget : MonoBehaviour
+public class ShootingTarget : Enemy
 {
     /// <summary>
     /// Shooting Target
@@ -12,13 +12,8 @@ public class ShootingTarget : MonoBehaviour
     /// Make a sound
     /// </summary>
 
-    private AudioSource audioSource;
-
-    public int hp = 5;
     [SerializeField]
     private AudioClip HitSFX;
-    [SerializeField]
-    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -26,17 +21,7 @@ public class ShootingTarget : MonoBehaviour
 
     }
 
-    public void TakeDamage(int damage)
-    {
-        hp -= damage;
-
-        if(hp < 1)
-        {
-            Die();
-        }
-    }
-
-    private void Die()
+    protected override void Die()
     {
         if (!animator)
             return;
@@ -44,7 +29,7 @@ public class ShootingTarget : MonoBehaviour
         {
             animator.SetTrigger("Hit");
             //Reset HP
-            hp = 5;
+            enemyHP = 5;
         }
     }
 }
