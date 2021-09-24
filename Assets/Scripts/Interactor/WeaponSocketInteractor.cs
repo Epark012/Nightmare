@@ -50,14 +50,16 @@ public class WeaponSocketInteractor : XRSocketInteractor
         //when a magazine in - Unity event
         //update current bullet in weapon 
         magazine = interactable.GetComponent<Magazine>();
-        if (magazine)
+        if (magazine != null)
             weapon.Bullet = magazine.currentBullet;
     }
 
 
     protected virtual void UpdateBulletCountOutMagazine(XRBaseInteractable interactable)
     {
-        if (magazine)
+        if (magazine != null)
             magazine.currentBullet = weapon.Bullet;
+        //Reset bullet count in empty gun.
+        weapon.Bullet = 0;
     }
 }

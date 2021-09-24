@@ -116,10 +116,14 @@ public class TwoHandGun : Weapon
             if (ray.rigidbody)
             {
                 Debug.Log(ray.transform.name);
-                ShootingTarget target = ray.transform.GetComponent<ShootingTarget>();
+                Enemy target = ray.transform.GetComponent<Enemy>();
                 if (target != null)
                     target.TakeDamage(bulletDamage);
-                ray.rigidbody.AddForceAtPosition(firePoint.transform.TransformDirection(Vector3.forward) * 200 * bulletDamage, ray.point);
+                if (ray.transform.tag == "Radar")
+                {
+                    ray.transform.GetComponent<AttachedItem>().RadarDamaged();
+                    ray.rigidbody.AddForceAtPosition(firePoint.transform.TransformDirection(Vector3.forward) * 200 * bulletDamage, ray.point);
+                }
             }
         }
 
@@ -160,8 +164,6 @@ public class TwoHandGun : Weapon
     {
         //Magazine in
         inMagazine = true;
-        //Check BulletCounts in the magazine
-        Bullet = socket.BulletCount;
         //Is Loaded Yet, have to slide
         isLoaded = false;
         //Static Magazine Mesh to On
@@ -178,8 +180,9 @@ public class TwoHandGun : Weapon
         isLoaded = false;
         //Static Magazine Mesh to Off
         magazineMesh.enabled = false;
-        //Update Magazine Current Bullet
-        socket.BulletCount = Bullet;
+
+        //Reset Bool in TwoHandGrabInteractable
+        xRBaseInteractable.GetComponent<TwoHandGrabInteractable>().HasReloaded = false;
     }
 
     //Called by Interactor

@@ -30,15 +30,14 @@ public class GunSocketInteractor : WeaponSocketInteractor
     protected override void OnSelectEntered(XRBaseInteractable interactable)
     {
         //check magazine Bullet
-        if (interactable.GetComponent<Magazine>())
-            BulletCount = interactable.GetComponent<Magazine>().currentBullet;
+       // if (interactable.GetComponent<Magazine>())
+       //     BulletCount = interactable.GetComponent<Magazine>().currentBullet;
 
         //Make ungrabbable
+        base.OnSelectEntered(interactable);
         WeaponAccessoryInteractable weaponAccessory = GetComponent<WeaponAccessoryInteractable>();
         if (weaponAccessory)
             weaponAccessory.IsEquipped = true;
-
-        base.OnSelectEntered(interactable);
     }
 
     protected override void OnSelectExited(XRBaseInteractable interactable)

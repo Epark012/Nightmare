@@ -5,6 +5,7 @@ using UnityEngine;
 public enum EnemyState
 { 
     Idle,
+    BadlyDamaged,
     DataDigging,
     Patrolling,
     Attacking
@@ -34,6 +35,9 @@ public class Enemy : MonoBehaviour
     protected Animator animator;
     protected AudioSource audioSource;
 
+    private bool radarAttached = true;
+
+    public bool RadarAttached { get { return radarAttached; } set { radarAttached = value; } }
 
     private void Start()
     {
@@ -43,6 +47,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
+        Debug.Log("Enemy Script");
         enemyHP -= damage;
         if (enemyHP < 1)
         {
@@ -53,7 +58,10 @@ public class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         if (!animator)
+        {
+            Debug.Log("Animator is not existed.");
             return;
+        }
         else
         {
             animator.SetTrigger("Hit");

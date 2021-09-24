@@ -15,8 +15,10 @@ public class TwoHandGrabInteractable : XRGrabInteractable
     private XRController xRController;
     private Weapon weapon;
 
-    bool secondaryButtonPressed;
-    bool hasReloaded = false;
+    private bool secondaryButtonPressed;
+    private bool hasReloaded = false;
+
+    public bool HasReloaded { get { return hasReloaded; } set { hasReloaded = value; } }
 
 
     // Start is called before the first frame update
@@ -29,6 +31,8 @@ public class TwoHandGrabInteractable : XRGrabInteractable
         }
 
         weapon = GetComponent<Weapon>();
+
+
     }
 
     public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)

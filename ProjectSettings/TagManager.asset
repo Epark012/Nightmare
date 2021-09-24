@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Magazine
   - Bullet
+  - Radar
   layers:
   - Default
   - TransparentFX
@@ -27,8 +28,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Enemy
+  - EnemyComponent
   - 
   - 
   - 
