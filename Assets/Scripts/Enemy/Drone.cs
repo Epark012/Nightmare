@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.AI;
 
 public class Drone : Enemy
@@ -7,11 +8,16 @@ public class Drone : Enemy
     private MeshRenderer droneMesh;
     [SerializeField]
     private GameObject broken;
+    [SerializeField]
+    private float scanRadius = 5f;
 
     private Rigidbody rigid;
     private NavMeshAgent agent;
     private Vector3 target;
     private int index = 0;
+
+    public List<Mineral> localMineral = new List<Mineral>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,11 +29,23 @@ public class Drone : Enemy
     // Update is called once per frame
     void Update()
     {
+        PatrollingState();
+        ScanningByRay();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, scanRadius);
+    }
+
+    protected override void PatrollingState()
+    {
         if(agent != null)
         {
             target = MineralWaypoints.Instance().MineralLists[index].transform.position;
             agent.SetDestination(target);
-            if (Vector3.Distance(transform.position, target) <= agent.stoppingDistance)
+            if (Vector3.Distance( new Vector3(transform.position.x, 0f, transform.position.z), new Vector3(target.x,0f,target.z)) <= agent.stoppingDistance)
             {
                 if (index < MineralWaypoints.Instance().MineralLists.Count - 1)
                 {
@@ -37,6 +55,23 @@ public class Drone : Enemy
                     index = 0;
             }
         }
+    }
+
+    private void ScanningByRay()
+    {
+        RaycastHit hit;
+        if(Physics.SphereCast(transform.position, scanRadius, transform.forward, out hit))
+        {
+            if(hit.transform.CompareTag("Mineral"))
+            {
+                Mineral temp = hit.transform.GetComponent<Mineral>();
+                if(temp != null && !localMineral.Contains(temp))
+                {
+                    localMineral.Add(temp);
+                }
+            }
+        }
+
     }
 
     public override void TakeDamage(int damage)
@@ -57,21 +92,8 @@ public class Drone : Enemy
         droneMesh.enabled = false;
         //Turn On separate broken drone mesh
         broken.SetActive(true);
+
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Bullet"))
-        {
-            Debug.Log("Hit by OnCollsionEnter");
-        }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Bullet"))
-        {
-            Debug.Log("Hit by OnTriggerEnter");
-        }
-    }
 }

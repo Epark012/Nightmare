@@ -7,6 +7,7 @@ TagManager:
   - Magazine
   - Bullet
   - Radar
+  - Mineral
   layers:
   - Default
   - TransparentFX

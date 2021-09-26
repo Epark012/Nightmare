@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 1838009198177970702}
   - component: {fileID: 3177760251280733722}
   m_Layer: 0
-  m_Name: Mini_droine1
+  m_Name: Patroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

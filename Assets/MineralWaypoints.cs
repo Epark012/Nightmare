@@ -13,6 +13,8 @@ public class MineralWaypoints : MonoBehaviour
     #endregion
 
     public List<Mineral> MineralLists = new List<Mineral>();
+
+
     private void Awake()
     {
         if (_instance == null)
