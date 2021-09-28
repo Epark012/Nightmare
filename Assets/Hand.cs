@@ -4,8 +4,14 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Hand : XRDirectInteractor
 {
+    [SerializeField]
+    private float count = 3f;
+
+    private bool isFlicked = false;
     private XRController controller = null;
     private FlickDetector flickDetector;
+
+    public bool IsFlicked { get { return isFlicked; } set { isFlicked = value; } }
 
     protected override void Awake()
     {
@@ -40,12 +46,32 @@ public class Hand : XRDirectInteractor
     {
         base.ProcessInteractor(updatePhase);
 
-        if(GetButtonValue(CommonUsages.secondaryButton) &&
-            GetButtonValue(CommonUsages.triggerButton) &&
-            GetButtonValue(CommonUsages.gripButton))
+        if(flickDetector != null)
         {
-            Debug.Log("Grab Test.");
-            flickDetector.CheckFlick(this);
+            if(GetButtonValue(CommonUsages.secondaryButton) &&
+                GetButtonValue(CommonUsages.triggerButton) &&
+                GetButtonValue(CommonUsages.gripButton)) 
+            {
+                if (!isFlicked)
+                {
+                    count -= Time.deltaTime;
+                    if (count <= 0)
+                    {
+                        Debug.Log("Time to open the inventiry");
+                        flickDetector.CheckFlick(this);
+                    }
+                }
+            }
+            else
+            {
+                count = 3;
+                if(IsFlicked)
+                {
+                    Debug.Log("Time to close the inventory.");
+                    isFlicked = false;
+                }
+            }
+
         }
     }
 }

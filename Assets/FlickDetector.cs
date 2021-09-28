@@ -19,6 +19,7 @@ public class FlickDetector : MonoBehaviour
         if(HasFlickEnded(speed))
         {
             OnFlick.Invoke();
+            hand.IsFlicked = true;
             Reset();
         }
     }

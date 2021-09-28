@@ -27,18 +27,14 @@ public class Magazine : MonoBehaviour
         return bulletType;
     }
 
-    public void InMagazine()
-    {
-        //boxCollider.enabled = false;
-    }
-
-    public void OutMagazine()
-    {
-        //boxCollider.enabled = true;
-    }
-
     public void ReleaseMagazine()
     {
         boxCollider.enabled = true;
+    }
+
+    public void MagazineMeshSetActive(bool meshOn)
+    {
+        MeshRenderer mesh = GetComponent<MeshRenderer>();
+        mesh.enabled = meshOn;
     }
 }

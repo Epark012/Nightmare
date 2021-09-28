@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3807104586511801604}
   m_Layer: 9
   m_Name: DoubleHandRifle
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -280,6 +280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af303ed1b140524bab5edae58a2d7f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshInfos:
+  - {fileID: 3393274545388856914}
   bulletType: 1
   bulletPrefab: {fileID: 1796375454871240309, guid: 4c4d77ea712ed9242b73635dc45faca6,
     type: 3}

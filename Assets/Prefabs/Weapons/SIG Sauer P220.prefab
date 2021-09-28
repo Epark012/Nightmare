@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 4081990958673333413}
   m_Layer: 9
   m_Name: SIG Sauer P220
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -331,6 +331,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e1579f0d0d3ab43ae74fb0d7506f26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshInfos:
+  - {fileID: 2114605036035012591}
+  - {fileID: 6504690119285428057}
+  - {fileID: 808236395498810732}
   bulletType: 0
   bulletPrefab: {fileID: 3913981173082845066, guid: c0bbfc497e988ee4fb106c89455ca818,
     type: 3}

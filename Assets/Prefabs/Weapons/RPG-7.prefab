@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 4809160324236837407}
   m_Layer: 9
   m_Name: RPG-7
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -751,9 +751,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ebbd2bd49ffb9a4486081168f8d2fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshInfos:
+  - {fileID: 5396849347453252859}
+  - {fileID: 170429866972058378}
   firePoint: {fileID: 3034318704095475854}
   rocketLauncherType: 0
-  rocketIndex: 0
   fuzzle: {fileID: 676784511005795624}
   fire: {fileID: 8300000, guid: e7d4da1e3e2988e49bd6c015c8740169, type: 3}
   outOfBullet: {fileID: 8300000, guid: ff69d9b5c29c57a4aa6d2fb63a2093cf, type: 3}

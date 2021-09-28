@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 635238097880303892}
   m_Layer: 0
   m_Name: Soviet PG-7L
-  m_TagString: Untagged
+  m_TagString: Magazine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
