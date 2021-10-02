@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8530328669875551050}
   - component: {fileID: 7593011146049360998}
   - component: {fileID: 3415340322446061842}
-  - component: {fileID: 3415340322446061843}
   - component: {fileID: 3415340322446062060}
   - component: {fileID: 1702168875103306145}
+  - component: {fileID: -5331093915556569122}
   m_Layer: 11
   m_Name: SIG_Magazine
   m_TagString: Magazine
@@ -100,7 +100,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3415340322446061843
+--- !u!65 &3415340322446062060
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3415340322446062061}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.00045753113, y: 0.00068834465, z: 0.00018306536}
+  m_Center: {x: -0.00003550586, y: -0.00014822732, z: 0.00000086692654}
+--- !u!114 &1702168875103306145
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,12 +122,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3415340322446062061}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: b5bc3249f39c34042a951113a4c0cea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletCapacity: 8
+  bulletType: 0
+  currentBullet: 8
+--- !u!114 &-5331093915556569122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3415340322446062061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a82b563ef033a0418fb2bc463bb32c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
-  m_Colliders:
-  - {fileID: 3415340322446062060}
+  m_Colliders: []
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -178,34 +205,6 @@ MonoBehaviour:
   m_ThrowAngularVelocityScale: 1
   m_GravityOnDetach: 0
   m_RetainTransformParent: 1
---- !u!65 &3415340322446062060
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3415340322446062061}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.00045753113, y: 0.00068834465, z: 0.00018306536}
-  m_Center: {x: -0.00003550586, y: -0.00014822732, z: 0.00000086692654}
---- !u!114 &1702168875103306145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3415340322446062061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5bc3249f39c34042a951113a4c0cea4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletCapacity: 8
-  bulletType: 0
-  currentBullet: 8
 --- !u!1 &8520591114553785637
 GameObject:
   m_ObjectHideFlags: 0

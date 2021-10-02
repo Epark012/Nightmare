@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// <summary>
 /// Designed for Off Pin Grab Interactable, such as Grenades or flash bomb.
 /// </summary>
-public class OffPinGrabInteractable : XRGrabInteractable
+public class OffPinGrabInteractable : XRGrabInteractable, IInventoryStorable
 {
     [SerializeField]
     private MeshRenderer pinMesh;
@@ -16,8 +16,18 @@ public class OffPinGrabInteractable : XRGrabInteractable
 
     private bool isPinned = false;
 
+    //IInventoryStorable Section
+    [SerializeField]
+    private bool isInSocket = true;
+    public bool IsInSocket { get { return isInSocket; } set { isInSocket = value; } }
+
+    private Rigidbody rigid;
+    private Collider coll;
     protected void Start()
     {
+        coll = GetComponent<Collider>();
+        rigid = GetComponent<Rigidbody>();
+
         socket = GetComponentInChildren<XRSocketInteractor>();
         grenades = GetComponent<Grenades>();
 
@@ -41,6 +51,8 @@ public class OffPinGrabInteractable : XRGrabInteractable
         //Pin Mesh Off
         pinMesh.enabled = false;
         grenades.IsActivated = true;
+
+        //interactable.GetComponent<MeshRenderer>().enabled = true;
     }
 
     public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
@@ -55,13 +67,25 @@ public class OffPinGrabInteractable : XRGrabInteractable
         isPinned = false;
     }
 
-    protected override void OnHoverEntered(XRBaseInteractor interactor)
-    {
-        base.OnHoverEntered(interactor);
-    }
-
     protected override void OnSelectExited(XRBaseInteractor interactor)
     {
         base.OnSelectExited(interactor);
+        OffInventorySocket();
+    }
+
+    public void OffInventorySocket()
+    {
+        if (!isInSocket)
+            return;
+        else
+        {
+            Debug.Log("Interface has been called.");
+            this.gameObject.transform.parent = null;
+            if (rigid != null)
+                rigid.useGravity = true;
+            if (coll != null)
+                coll.isTrigger = false;
+            isInSocket = false;
+        }
     }
 }

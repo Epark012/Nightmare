@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -10,6 +11,11 @@ public class Hand : XRDirectInteractor
     private bool isFlicked = false;
     private XRController controller = null;
     private FlickDetector flickDetector;
+
+    [Header("Power Wrist Events")]
+    public UnityEvent OnInventoryReady;
+    public UnityEvent OnInventoryOpen;
+    public UnityEvent OnGrabRelease;
 
     public bool IsFlicked { get { return isFlicked; } set { isFlicked = value; } }
 
@@ -55,8 +61,9 @@ public class Hand : XRDirectInteractor
                 if (!isFlicked)
                 {
                     count -= Time.deltaTime;
-                    if (count <= 0)
+                    if (count <= 0) //Power Wrist Ready.
                     {
+                        OnInventoryReady.Invoke();
                         Debug.Log("Time to open the inventiry");
                         flickDetector.CheckFlick(this);
                     }
@@ -69,9 +76,9 @@ public class Hand : XRDirectInteractor
                 {
                     Debug.Log("Time to close the inventory.");
                     isFlicked = false;
+                    OnGrabRelease.Invoke();
                 }
             }
-
         }
     }
 }

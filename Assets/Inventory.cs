@@ -14,71 +14,25 @@ public class Inventory : MonoBehaviour
     private AudioSource audioSource;
     private Animator inventoryAnimator;
 
-    //Set 3 for initial socket number
-    private InventorySocketInteractor[] sockets = new InventorySocketInteractor[3];
-
-
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         inventoryAnimator = inventory.GetComponent<Animator>();
-        sockets = GetComponentsInChildren<InventorySocketInteractor>();
     }
 
-    private bool IsInventoryOpenned()
+    public void OpenInventory()
     {
-        return isInventoryOpenned;
-    }
-
-    public void CallInventory()
-    {
-        if(IsInventoryOpenned())
-        {
-            CloseInventory();
-        }
-        else
-        {
-            OpenInventory();
-        }
-    }
-
-    private void OpenInventory()
-    {
-        //Play Sound
-        audioSource.PlayOneShot(inventoryClip);
-
-        //Call Socket the method for Open Logic regarding SelectingTarget Mesh && SocketActive
-        for(int i = 0; i < 3; i++)
-        {
-            sockets[i].InventorySocket(true);
-        }
-
-        //Inventory images
-        inventoryAnimator.SetTrigger("Open");
-
-        //Call by hand Logic
-        isInventoryOpenned = true;
-
         Debug.Log("Inventory openned");
+        inventory.SetActive(true);
+        isInventoryOpenned = true;
+        audioSource.PlayOneShot(inventoryClip);
     }
 
-    private void CloseInventory()
+    public void CloseInventory()
     {
-        //Play Sound
-        audioSource.PlayOneShot(inventoryClip);
-
-        //Call Socket the method for Open Logic regarding SelectingTarget Mesh && SocketActive
-        for (int i = 0; i < 3; i++)
-        {
-            sockets[i].InventorySocket(false);
-        }
-
-        //Inventory images
-        inventoryAnimator.SetTrigger("Close");
-
-        //Call by hand Logic
+        inventory.SetActive(false);
         isInventoryOpenned = false;
-
         Debug.Log("Inventory closed.");
+        audioSource.PlayOneShot(inventoryClip);
     }
 }

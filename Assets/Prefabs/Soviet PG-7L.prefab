@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 2309147670474906217}
   - component: {fileID: 2309147670474906222}
   - component: {fileID: 2309147670474906223}
-  - component: {fileID: 2309147670474906220}
+  - component: {fileID: 2169915115056183433}
   m_Layer: 11
   m_Name: Soviet PG-7L
   m_TagString: Untagged
@@ -264,7 +264,7 @@ MonoBehaviour:
     type: 3}
   smokeVFX: {fileID: 8863834109525393901}
   explosionSFX: {fileID: 8300000, guid: a0b4a08b289b019458e1827cfc2bce27, type: 3}
---- !u!114 &2309147670474906220
+--- !u!114 &2169915115056183433
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,12 +273,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2309147670474906221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: cd1d24f0eab7a95459eace914342e1ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
-  m_Colliders:
-  - {fileID: 2309147670474906216}
+  m_Colliders: []
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295

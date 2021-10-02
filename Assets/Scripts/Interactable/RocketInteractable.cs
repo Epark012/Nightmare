@@ -1,19 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-/// <summary>
-/// Designed for Magazine uses.
-/// </summary>
-public class WeaponAccessoryInteractable : XRGrabInteractable, IInventoryStorable
+public class RocketInteractable : XRGrabInteractable, IInventoryStorable
 {
     [SerializeField]
     private bool isInSocket = true;
-    private bool isEquipped = false;
-
-    public bool IsEquipped { get { return isEquipped; } set { isEquipped = value; } }
     public bool IsInSocket { get { return isInSocket; } set { isInSocket = value; } }
+
 
     private Rigidbody rigid;
     private Collider coll;
@@ -22,13 +15,6 @@ public class WeaponAccessoryInteractable : XRGrabInteractable, IInventoryStorabl
     {
         coll = GetComponent<Collider>();
         rigid = GetComponent<Rigidbody>();
-    }
-
-    public override bool IsSelectableBy(XRBaseInteractor interactor)
-    {
-        if (interactor.tag == "Player" && isEquipped)
-            return false;
-        return base.IsSelectableBy(interactor);
     }
 
     protected override void OnSelectExited(XRBaseInteractor interactor)
