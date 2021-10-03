@@ -116,7 +116,7 @@ public class TwoHandGun : Weapon
             if (ray.rigidbody)
             {
                 Debug.Log(ray.transform.name);
-                Enemy target = ray.transform.GetComponent<Enemy>();
+                IDamageable target = ray.transform.GetComponent<IDamageable>();
                 if (target != null)
                     target.TakeDamage(bulletDamage);
                 if (ray.transform.tag == "Radar")

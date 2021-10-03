@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine.AI;
 
-public class Drone : Enemy
+public class Drone : Enemy, IDamageable
 {
+    private bool isProvoked = false;
+    [SerializeField]
+    private float invokedTime = 30f;
+
     [SerializeField]
     private MeshRenderer droneMesh;
     [SerializeField]
@@ -24,13 +28,26 @@ public class Drone : Enemy
     {
         agent = GetComponent<NavMeshAgent>();
         rigid = GetComponent<Rigidbody>();
+        state = EnemyState.Patrolling;
     }
 
     // Update is called once per frame
     void Update()
     {
-        PatrollingState();
-        ScanningByRay();
+        switch (state)
+        {
+            case EnemyState.Patrolling:
+                PatrollingState();
+                ScanningByRay(); 
+                break;
+            case EnemyState.BadlyDamaged:
+                //
+                break;
+            case EnemyState.Attacking:
+                //
+                AttackState();
+                break;
+        }
     }
 
     private void OnDrawGizmos()
@@ -74,9 +91,15 @@ public class Drone : Enemy
 
     }
 
-    public override void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
-        base.TakeDamage(damage);
+        state = EnemyState.Attacking;
+
+        enemyHP -= damage;
+        if (enemyHP < 1)
+        {
+            Die();
+        }
     }
 
     protected override void Die()
@@ -95,5 +118,18 @@ public class Drone : Enemy
 
     }
 
-
+    protected override void AttackState()
+    {
+        float count = invokedTime;
+        count -= Time.deltaTime;
+        if(count > 0)
+        {
+            //Attack
+            Debug.Log("Drone is attacking.");
+        }
+        else
+        {
+            state = EnemyState.Patrolling;
+        }
+    }
 }

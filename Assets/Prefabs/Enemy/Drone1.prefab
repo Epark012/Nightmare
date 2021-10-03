@@ -214,6 +214,8 @@ MonoBehaviour:
   state: 0
   droneMesh: {fileID: 3072079577201263307}
   broken: {fileID: 5685035115115720815}
+  scanRadius: 5
+  localMineral: []
 --- !u!195 &13259707227094072
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -247,6 +249,7 @@ GameObject:
   - component: {fileID: 2343148416470508199}
   - component: {fileID: 4804937961147024032}
   - component: {fileID: 4909825919584972397}
+  - component: {fileID: 5432409322853125889}
   m_Layer: 21
   m_Name: Radar
   m_TagString: Untagged
@@ -315,6 +318,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5432409322853125889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173890982892892496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d307218be1a79bd44bbe9c7a9354d69f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1295287155435167886
 GameObject:
   m_ObjectHideFlags: 0

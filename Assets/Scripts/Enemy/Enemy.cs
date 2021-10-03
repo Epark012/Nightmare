@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
     }
-
+/*
     public virtual void TakeDamage(int damage)
     {
         Debug.Log("Enemy Script");
@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour
             Die();
         }
     }
-
+*/
     protected virtual void Die()
     {
         if (!animator)

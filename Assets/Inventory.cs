@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(FlickDetector))]
 public class Inventory : MonoBehaviour
@@ -10,7 +8,7 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private AudioClip inventoryClip;
 
-    private bool isInventoryOpenned = false;
+    //private bool isInventoryOpenned = false;
     private AudioSource audioSource;
     private Animator inventoryAnimator;
 
@@ -24,14 +22,14 @@ public class Inventory : MonoBehaviour
     {
         Debug.Log("Inventory openned");
         inventory.SetActive(true);
-        isInventoryOpenned = true;
+        //isInventoryOpenned = true;
         audioSource.PlayOneShot(inventoryClip);
     }
 
     public void CloseInventory()
     {
         inventory.SetActive(false);
-        isInventoryOpenned = false;
+        //isInventoryOpenned = false;
         Debug.Log("Inventory closed.");
         audioSource.PlayOneShot(inventoryClip);
     }

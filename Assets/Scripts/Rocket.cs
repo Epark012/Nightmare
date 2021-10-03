@@ -81,11 +81,16 @@ public class Rocket : MonoBehaviour
 
         foreach (var nearByObject in colliders)
         {
+            IDamageable target = nearByObject.GetComponent<IDamageable>();
+            if (target != null)
+                target.TakeDamage(999);
+
             Rigidbody rb = nearByObject.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.AddExplosionForce(power, transform.position, radius);
             }
+
         }
 
         //Turn off mesh

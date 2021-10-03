@@ -118,10 +118,9 @@ public class HandGun : Weapon
             {
                 Debug.Log(ray.transform.name);
 
-                Enemy target = ray.transform.GetComponent<Enemy>();
+                IDamageable target = ray.transform.GetComponent<IDamageable>();
                 if (target != null)
                     target.TakeDamage(bulletDamage);
-
                 if (ray.transform.tag == "Radar")
                 {
                     ray.transform.GetComponent<AttachedItem>().RadarDamaged();

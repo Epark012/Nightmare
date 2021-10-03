@@ -14,7 +14,7 @@ public class InventoryGrabZone : MonoBehaviour
         if(other.gameObject.TryGetComponent(out IInventoryStorable item))
         {
             isOccupied = false;
-            Debug.Log("asdlfjsdlifk " + item);
+            Debug.Log("Inventory Grab Zone Exit " + item);
         }
     }
 }
