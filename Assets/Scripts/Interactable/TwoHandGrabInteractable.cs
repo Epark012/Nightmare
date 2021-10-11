@@ -29,10 +29,7 @@ public class TwoHandGrabInteractable : XRGrabInteractable
             item.onSelectEntered.AddListener(OnSecondHandGrab);
             item.onSelectExited.AddListener(OnSecondHandRelease);
         }
-
         weapon = GetComponent<Weapon>();
-
-
     }
 
     public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
