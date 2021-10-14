@@ -23,9 +23,11 @@ public class HeadDetector : MonoBehaviour
     {
         if(other.TryGetComponent(out NightmareHeadset headset))
         {
-            Debug.Log(other.gameObject.name + " is detected in OnTriggerEnter.");
-            Debug.Log("Headset Event is triggered.");
-            OnHeadSetOn.Invoke();
+            if(headset.IsHold)
+            {
+                Debug.Log(headset.gameObject.name + " is detected in OnTriggerEnter.");
+                OnHeadSetOn.Invoke();
+            }
         }
     }
 
@@ -33,29 +35,6 @@ public class HeadDetector : MonoBehaviour
     public void SceneTransition(int index)
     {
         //Fade and SceneTransition
-        LoadScene(index, 3, 3);
-    }
-
-    public void LoadScene(int index, float fadeDuration, float sceneTransitionTime)
-    {
-        StartCoroutine(FadeScene(index, fadeDuration, sceneTransitionTime));
-    }
-
-    private IEnumerator FadeScene(int index, float duration, float waitTime)
-    {
-        fader.gameObject.SetActive(true);
-
-        for (float t = 0; t < 1; t += Time.deltaTime / duration)
-        {
-            fader.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, t));
-            yield return null;
-        }
-
-        AsyncOperation ao = SceneManager.LoadSceneAsync(index);
-        while (!ao.isDone)
-            yield return null;
-        yield return new WaitForSeconds(waitTime);
-
-        fader.gameObject.SetActive(false);
+        NightmareSceneManagement.LoadScene(index, 1);
     }
 }

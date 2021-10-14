@@ -2,9 +2,20 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Desinged for Nightmare Scene Management.
+/// When it is called to load next scenes or Main scene, it will visit Loading Scene. 
+/// When it is loading scenes, it will call a function to fade the vision of camera. 
+/// it needs to have reference for camera in each scene.
+/// </summary>
 public class NightmareSceneManagement : MonoBehaviour
 {
     private static NightmareSceneManagement Instance;
+    private Nightmare_XRRig xrRig;
+
+    [Header("Scene Setting")]
+    [SerializeField]
+    private int loadingSceneIndex;
 
     private void Awake()
     {
@@ -19,26 +30,36 @@ public class NightmareSceneManagement : MonoBehaviour
         }
     }
 
-   /* public static void LoadScene(int index, float fadeDuration, float sceneTransitionTime)
+    //Called in each scene to find references
+    private void SceneInit()
     {
-        Instance.StartCoroutine(Instance.FadeScene(index, fadeDuration, sceneTransitionTime));
+        //Find XR Rig
+        xrRig = FindObjectOfType<Nightmare_XRRig>();
     }
 
-    private IEnumerator FadeScene(int index, float duration, float waitTime)
+   public static void LoadScene(int nextSceneIndex, float fadeDuration)
     {
-        fader.gameObject.SetActive(true);
-        
-        for(float t = 0; t < 1; t += Time.deltaTime/duration)
-        {
-            fader.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, t));
-            yield return null;
-        }
+        Instance.StartCoroutine(Instance.LoadSceneIE(nextSceneIndex, fadeDuration));
+    }
 
-        AsyncOperation ao = SceneManager.LoadSceneAsync(index);
+    private IEnumerator LoadSceneIE(int NextSceneIndex, float fadeDuration)
+    {
+            //Fade Operation
+        if(xrRig != null)
+        {
+            xrRig.FadeScene();
+        }
+        else
+        {
+            SceneInit();
+            xrRig.FadeScene();
+        }
+        yield return new WaitForSeconds(fadeDuration);
+        
+        //Move to Loading Scene
+        NightmareLoadingSceneManager.SetSceneIndex(NextSceneIndex);
+        AsyncOperation ao = SceneManager.LoadSceneAsync(loadingSceneIndex);
         while (!ao.isDone)
             yield return null;
-        yield return new WaitForSeconds(waitTime);
-
-        fader.gameObject.SetActive(false);
-    }*/
+    }
 }
