@@ -10,7 +10,8 @@ public class Hand : XRDirectInteractor
 
     private bool isFlicked = false;
     private XRController controller = null;
-    private FlickDetector flickDetector;
+    private HandPresence handPresence = null;
+    private FlickDetector flickDetector = null;
 
     [Header("Power Wrist Events")]
     public UnityEvent OnInventoryReady;
@@ -23,7 +24,32 @@ public class Hand : XRDirectInteractor
     {
         base.Awake();
         controller = GetComponent<XRController>();
+        handPresence = controller.GetComponentInChildren<HandPresence>();
         flickDetector = GetComponent<FlickDetector>();
+
+        onSelectEntered.AddListener(OnGrab);
+        onHoverExited.AddListener(OffGrab);
+    }
+
+    private void OnGrab(XRBaseInteractable interactable)
+    {
+        if(handPresence != null)
+            handPresence.TogglePhysics(false);
+        else
+        {
+            handPresence = controller.GetComponentInChildren<HandPresence>();
+            handPresence?.TogglePhysics(false);
+        }
+    }
+    private void OffGrab(XRBaseInteractable interactable)
+    {
+        if (handPresence != null)
+            handPresence.TogglePhysics(true);
+        else
+        {
+            handPresence = controller.GetComponentInChildren<HandPresence>();
+            handPresence.TogglePhysics(true);
+        }
     }
 
     private Vector3 Getvalue(InputFeatureUsage<Vector3> usage)

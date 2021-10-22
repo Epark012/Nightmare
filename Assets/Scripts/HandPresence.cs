@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -11,6 +10,9 @@ public class HandPresence : MonoBehaviour
     private InputDevice targetDevice;
     private GameObject spawnHandModel;
     private Animator handAnimator;
+
+    [SerializeField]
+    private Collider[] colls;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +32,7 @@ public class HandPresence : MonoBehaviour
             UpdateHandAnimation();
         }
     }
-    void UpdateHandAnimation()
+    private void UpdateHandAnimation()
     {
         if(targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue))
         {
@@ -50,7 +52,7 @@ public class HandPresence : MonoBehaviour
             handAnimator.SetFloat("Grip", 0);
         }
     }
-    void TryInitialise()
+    private void TryInitialise()
     {
         List<InputDevice> devices = new List<InputDevice>();
         InputDevices.GetDevicesWithCharacteristics(controllerCharacteristics, devices);
@@ -66,6 +68,36 @@ public class HandPresence : MonoBehaviour
 
             spawnHandModel = Instantiate(handModelPrefab, transform);
             handAnimator = spawnHandModel.GetComponent<Animator>();
+            GetCollsFromObject(spawnHandModel);
+        }
+    }
+    
+    private void GetCollsFromObject(GameObject hand)
+    {
+        colls = hand.GetComponentsInChildren<Collider>();
+
+        if(colls.Length == 0)
+        {
+            Debug.Log("Physical colliders in hand hierachy is empty.");
+        }
+    }
+
+    public void TogglePhysics(bool usePhysics)
+    {
+        if(colls.Length > 0)
+        {
+            for(int i = 0; i < colls.Length; i++)
+            {
+                colls[i].isTrigger = !usePhysics;
+            }
+        }
+        else
+        {
+            GetCollsFromObject(spawnHandModel);
+            for (int i = 0; i < colls.Length; i++)
+            {
+                colls[i].isTrigger = !usePhysics;
+            }
         }
     }
 }
