@@ -5,6 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// <summary>
 /// Designed for button based tools.
 /// </summary>
+[RequireComponent(typeof(BoxCollider))]
 public class ButtonModule : XRBaseInteractable
 {
     public UnityEvent onPress = null;
