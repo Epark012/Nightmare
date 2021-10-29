@@ -1,14 +1,24 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 
 /// <summary>
 /// Designed for button based tools.
+/// If subscribing other objects, use GUI, otherwise, use OnClick Function in this script.
 /// </summary>
 [RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Rigidbody))]
 public class ButtonModule : XRBaseInteractable
 {
-    public UnityEvent onPress = null;
+    [Header("Button Event")]
+    [SerializeField]
+    private UnityEvent onPress = null;
+
+    [Header("Properties")]
+    [SerializeField]
+    private AudioClip clickClip;
 
     private float yMin = 0.0f;
     private float yMax = 0.0f;
@@ -17,12 +27,19 @@ public class ButtonModule : XRBaseInteractable
     private float previousHeight = 0.0f;
     private XRBaseInteractor hoverInteractor;
 
+    private AudioSource audioSource = null;
+
     protected override void Awake()
     {
         base.Awake();
         onHoverEntered.AddListener(StartPress);
         onHoverExited.AddListener(EndPress);
+
+        audioSource = GetComponent<AudioSource>();
+        onPress.AddListener(OnClick);
     }
+
+
     protected override void OnDestroy()
     {
         base.OnDestroy();
@@ -104,8 +121,9 @@ public class ButtonModule : XRBaseInteractable
         return transform.localPosition.y == inRange;
     }
 
-    public void ButtonPressedTest(string message)
+    private void OnClick()
     {
-        Debug.Log(message + " is pressed.");
+        //Click Sound
+        audioSource?.PlayOneShot(clickClip);
     }
 }

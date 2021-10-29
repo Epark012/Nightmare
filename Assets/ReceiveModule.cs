@@ -9,10 +9,23 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class ReceiveModule : MonoBehaviour
 {
+    [Header("Property")]
+    [SerializeField]
+    private string animationStringMessage = null;
+
     private Animator baseAnimator = null;
+    private bool isExecuting = false;
+
+    public bool IsExecuting { get { return isExecuting; } set { isExecuting = value; } }
 
     void Start()
     {
         baseAnimator = GetComponent<Animator>();    
     }
+
+    public void ExecuteAction()
+    {
+        baseAnimator.SetTrigger(animationStringMessage);
+    }
+
 }

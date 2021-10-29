@@ -22,16 +22,15 @@ public class DisplayModule : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = sprites[0];
-        maxSpriteCount = sprites.Length;
+        maxSpriteCount = sprites.Length - 1;
     }
 
     public void NextSprite()
     {
-        if (currentIndex == maxSpriteCount - 1)
+        if (currentIndex == maxSpriteCount)
         {
             currentIndex = 0;
             spriteRenderer.sprite = sprites[currentIndex];
-            return;
         }
         else
             MoveSprite(1);
@@ -41,7 +40,7 @@ public class DisplayModule : MonoBehaviour
     {
         if(currentIndex == 0)
         {
-            currentIndex = maxSpriteCount - 1;
+            currentIndex = maxSpriteCount;
             spriteRenderer.sprite = sprites[currentIndex];
             return;
         }
@@ -53,10 +52,5 @@ public class DisplayModule : MonoBehaviour
     {
         currentIndex += index;
         spriteRenderer.sprite = sprites[currentIndex];
-
-        if(currentIndex == maxSpriteCount - 1)
-        {
-            currentIndex = 0;
-        }
     }
 }
