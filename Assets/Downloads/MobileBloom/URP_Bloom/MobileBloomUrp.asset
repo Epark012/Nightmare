@@ -53,8 +53,8 @@ MonoBehaviour:
   settings:
     Event: 500
     blitMaterial: {fileID: 2100000, guid: 86d20c2c4ae4e9448831fab009e3f968, type: 2}
-    BloomDiffusion: 0.43
+    BloomDiffusion: 0.26
     BloomColor: {r: 1, g: 1, b: 1, a: 1}
-    BloomAmount: 1.36
-    BloomThreshold: 0.332
+    BloomAmount: 0.44
+    BloomThreshold: 0.405
     BloomSoftness: 0.5

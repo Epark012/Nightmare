@@ -91,6 +91,8 @@ public class TwoHandGrabInteractable : XRGrabInteractable
     public void OnSecondHandRelease(XRBaseInteractor interactor)
     {
         Debug.Log("Second Hand Release");
+        secondInteractor.transform.position = Vector3.zero;
+        secondInteractor.transform.rotation = Quaternion.identity;
         secondInteractor = null;
     }
 
@@ -103,7 +105,7 @@ public class TwoHandGrabInteractable : XRGrabInteractable
 
     protected override void OnSelectExited(XRBaseInteractor interactor)
     {
-        Debug.Log("First Grab Enter");
+        Debug.Log("First Grab Exit");
         base.OnSelectExited(interactor);
         xRController = null;
         secondInteractor = null;

@@ -6,7 +6,8 @@ public enum BulletType
 {
     SIG = 0,
     AR15 = 1,
-    UMP45 = 2
+    UMP45 = 2,
+    DessertEagle = 4
 }
 
 public enum RocketLauncherType
