@@ -51,7 +51,7 @@ public class IKLegTargetSolver : MonoBehaviour
                 int direction = 1;
                 //int direction = body.InverseTransformPoint(hit.point).z > body.InverseTransformPoint(newPos).z ? 1 : -1;
                 //According to Body Direction, coding has to be fixed.
-                newPos = hit.point + (-body.up * (direction * stepLength)) + footPosOffset;
+                newPos = hit.point + (body.forward * (direction * stepLength)) + footPosOffset;
                 newNorm = hit.normal + footRotOffset;
             }
         }

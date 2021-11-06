@@ -17,7 +17,6 @@ public class AttachedItem : MonoBehaviour
     //Being Hit
     public void RadarDamaged()
     {
-        main.RadarAttached = false;
         //Make it detached from robot body.
         rigid.isKinematic = false;
         transform.parent = null;
