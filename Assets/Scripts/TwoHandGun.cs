@@ -119,11 +119,6 @@ public class TwoHandGun : Weapon
                 IDamageable target = ray.transform.GetComponent<IDamageable>();
                 if (target != null)
                     target.TakeDamage(bulletDamage);
-                if (ray.transform.tag == "Radar")
-                {
-                    ray.transform.GetComponent<AttachedItem>().RadarDamaged();
-                    ray.rigidbody.AddForceAtPosition(firePoint.transform.TransformDirection(Vector3.forward) * 200 * bulletDamage, ray.point);
-                }
             }
         }
 

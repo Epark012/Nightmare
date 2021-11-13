@@ -21,7 +21,7 @@ public class ShootingTarget : Enemy
 
     }
 
-    protected override void Die()
+    protected override void DieAnimation()
     {
         if (!animator)
             return;
