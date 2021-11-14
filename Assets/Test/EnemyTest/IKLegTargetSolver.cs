@@ -85,7 +85,7 @@ public class IKLegTargetSolver : MonoBehaviour
 
     private void DrawTestRay()
     {
-        Debug.DrawRay(body.position + (body.right * footSpacing) + (Vector3.up * 2), Vector3.down, Color.cyan);
-        Debug.Log("Ray origin : " + body.position + (body.right * footSpacing));
+        //Debug.DrawRay(body.position + (body.right * footSpacing) + (Vector3.up * 2), Vector3.down, Color.cyan);
+        //Debug.Log("Ray origin : " + body.position + (body.right * footSpacing));
     }
 }

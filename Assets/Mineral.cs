@@ -7,15 +7,40 @@
 /// </summary>
 public class Mineral : MonoBehaviour
 {
+    private bool isInfected = false;
+    public bool IsInfected { get { return IsInfected; }  set { IsInfected = value; } }
+    
+    [SerializeField]
+    private MineralManager mineralManager = null;
+    [SerializeField]
+    private bool isMineralGrenades = false;
+
+    public bool IsMineralGrenades { get {return isMineralGrenades; } }
 
     // Start is called before the first frame update
     void Start()
     {
+        mineralManager = GetComponentInParent<MineralManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void AddToMineralList()
     {
+        if(!IsInfected)
+            mineralManager.AddToList(this);
+    }
 
+    //when it is instantiated.
+    public void MineralInit()
+    {
+        //Add to mineral manager
+        AddToMineralList();
+    }
+
+    //When it is infected, removed from mineralList
+    public void InfectedMineral()
+    {
+        isInfected = true;
+        if(IsInfected)
+            mineralManager.RemoveFromList(this);
     }
 }

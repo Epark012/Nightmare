@@ -11,8 +11,7 @@ public class Drone : Enemy, IDamageable
     private float invokedTime = 30f;
     [SerializeField]
     private float scanRadius = 5f;
-    [SerializeField]
-    private MineralManager mineralManager = null;
+    
 
     private Vector3 target = Vector3.zero;
 
@@ -20,7 +19,6 @@ public class Drone : Enemy, IDamageable
     // Start is called before the first frame update
     void Start()
     {
-        mineralManager = FindObjectOfType<MineralManager>();
         target = mineralManager.GetNextDestinationFromArray().position;
     }
 
@@ -29,16 +27,12 @@ public class Drone : Enemy, IDamageable
     {
         switch (state)
         {
-            case EnemyState.Patrolling:
+            case EnemyState.Idle:
+                //
+                break;
+            case EnemyState.Working:
                 PatrollingState();
                 //ScanningByRay(); 
-                break;
-            case EnemyState.BadlyDamaged:
-                //
-                break;
-            case EnemyState.Attacking:
-                //
-                AttackState();
                 break;
         }
     }
@@ -58,21 +52,11 @@ public class Drone : Enemy, IDamageable
 
     public void TakeDamage(float damage)
     {
-       // state = EnemyState.Attacking;
         enemyHP -= damage;
 
         if (enemyHP < 1)
         {
             base.Destroyed();
         }
-    }
-
-
-
-
-    protected override void AttackState()
-    {
-        target = mineralManager.GetTargetMineral().transform.position;
-        agent.SetDestination(target);
     }
 }

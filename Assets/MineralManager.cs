@@ -36,4 +36,14 @@ public class MineralManager : MonoBehaviour
         Debug.Log("GetTargetMineral() is targeting : " + mineralList[lastIndexofArray - 1]);
         return mineralList[lastIndexofArray - 1];
     }
+
+    public void AddToList(Mineral mineral)
+    {
+        mineralList.Add(mineral);
+    }
+
+    public void RemoveFromList(Mineral mineral)
+    {
+        mineralList.Remove(mineral);
+    }
 }

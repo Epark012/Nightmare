@@ -6,10 +6,14 @@ using UnityEngine.AI;
 public enum EnemyState
 { 
     Idle,
-    BadlyDamaged,
-    DataDigging,
-    Patrolling,
-    Attacking
+    Working,
+}
+
+public enum MovementState
+{
+    Waiting,
+    Moving,
+    Operating
 }
 
 /// <summary>
@@ -26,13 +30,14 @@ public class Enemy : MonoBehaviour
     private float radarDistance;
     [SerializeField]
     private bool isScatterable = false;
-    public EnemyState state;
+    public EnemyState state = EnemyState.Idle;
+    public MovementState mState = MovementState.Waiting;
     #endregion
 
     #region Essential Property
     protected Animator animator;
     protected AudioSource audioSource;
-    private Collider coll; 
+    private Collider coll = null; 
     protected NavMeshAgent agent;
 
     [SerializeField]
@@ -40,6 +45,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private GameObject broken;
     [SerializeField]
+    protected MineralManager mineralManager = null;
     //private float destructionRemainSeconds = 3.0f;
     #endregion
 
@@ -49,6 +55,7 @@ public class Enemy : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         coll = GetComponent<Collider>();
         agent = GetComponent<NavMeshAgent>();
+        mineralManager = FindObjectOfType<MineralManager>();
     }
 
     protected virtual void DieAnimation()
