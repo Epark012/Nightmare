@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 0dd155634c0ab8f498b7ba32861be107
+guid: 8dd6208f8ebccfe4185e7b832877e8d2
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 2Leg_Guard
+    second: {fileID: 2100000, guid: 923ea3cd9b648aa409198c6002ddc801, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -45,7 +50,7 @@ ModelImporter:
     importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1

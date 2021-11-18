@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
+    [Header("Turret Property")]
     [SerializeField]
-    private Transform head = null;
+    protected Transform head = null;
     [SerializeField]
-    private Transform target = null;
+    protected Transform target = null;
     [SerializeField]
-    private Transform firePoint = null;
+    protected Transform firePoint = null;
     [SerializeField]
-    private float shootingDistance = 10f;
+    protected float shootingDistance = 10f;
     [SerializeField]
-    private float turretDamage = 3f;
+    protected float turretDamage = 3f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,6 @@ public class Turret : MonoBehaviour
     void Update()
     {
         Targeting(target);
-        //Shooting();
     }
 
     private void Targeting(Transform target)
@@ -34,30 +34,14 @@ public class Turret : MonoBehaviour
         head.LookAt(targetPos);
     }
 
-    public void ShootingAnimation()
+    protected virtual void Shooting()
     {
-        //shoot raycast
-        Shooting();
+       
     }
 
-    private void Shooting()
+    //Trail Renderer for shoot range.
+    protected virtual void ShootVFX(Vector3 targetTransform)
     {
-        RaycastHit hit;
-
-        if(Physics.Raycast(firePoint.position, target.position - firePoint.position, out hit, shootingDistance))
-        {
-            Debug.Log("Targetting : " + hit.collider.name + " from " + this.gameObject.name);
-
-            IDamageable enemy = hit.collider.gameObject.GetComponent<IDamageable>();
-            if(enemy != null)
-            {
-                Debug.Log("targeting Idamageable item : " + hit.transform.name);
-                enemy.TakeDamage(turretDamage);
-            }
-            else
-            {
-                Debug.Log("targeting item is not IDamageable : " + hit.transform.name);
-            }
-        }
+        
     }
 }

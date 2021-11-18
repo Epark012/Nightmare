@@ -32,9 +32,9 @@ public class NCV : Enemy, IDamageable
 
     private void WorkingOnMineral()
     {
-        if(mState == MovementState.Waiting)
+        if(mState == MovementState.IsReady)
         {
-            target = mineralManager.GetTargetMineral();
+            target = cortex.GetTargetMineral();
             mState = MovementState.Moving;
             //Approach target mineral
             agent.SetDestination(target.transform.position);

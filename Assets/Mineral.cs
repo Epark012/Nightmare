@@ -7,7 +7,10 @@
 /// </summary>
 public class Mineral : MonoBehaviour
 {
+    private bool isScanned = false;
     private bool isInfected = false;
+
+    public bool IsScanned { get { return isScanned; } set { isScanned = true; } }
     public bool IsInfected { get { return IsInfected; }  set { IsInfected = value; } }
     
     [SerializeField]

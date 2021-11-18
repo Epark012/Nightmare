@@ -89,7 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8189049174406728638}
   - component: {fileID: 5111972621270288644}
-  - component: {fileID: 1622319503588141997}
+  - component: {fileID: 1347609764858774290}
   m_Layer: 0
   m_Name: Turret_Level1_AR
   m_TagString: Untagged
@@ -132,7 +132,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1622319503588141997
+--- !u!114 &1347609764858774290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,13 +141,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2769569042160972807}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2313e1080b145ed46b74c5ca31e570ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 15d56759d2a7b094d95c90d2126f07af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   head: {fileID: 177312545971128822}
   target: {fileID: 0}
   firePoint: {fileID: 8248168256442504114}
   shootingDistance: 10
+  turretDamage: 3
+  shootTrail: {fileID: 746771844140324607, guid: 0081e549b59494743b578ecae1300f3e,
+    type: 3}
+  muzzleFlash: {fileID: 2782036951698449612}
 --- !u!1 &3937648816885015430
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,11 +441,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6006411983024360103, guid: 58462061ee0b72c4f80ecf4e1e8647f2,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58462061ee0b72c4f80ecf4e1e8647f2, type: 3}
 --- !u!4 &2782036951698449613 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6006411983024360102, guid: 58462061ee0b72c4f80ecf4e1e8647f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8485001867371097707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2782036951698449612 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6006411983024360103, guid: 58462061ee0b72c4f80ecf4e1e8647f2,
     type: 3}
   m_PrefabInstance: {fileID: 8485001867371097707}
   m_PrefabAsset: {fileID: 0}
