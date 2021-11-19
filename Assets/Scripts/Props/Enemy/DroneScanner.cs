@@ -6,7 +6,7 @@ using System.Collections;
 /// <summary>
 /// Scan
 /// </summary>
-public class Drone : Enemy, IDamageable
+public class DroneScanner : Enemy, IDamageable
 {
     [Header("Drone Propery")]
     [SerializeField]
@@ -16,7 +16,6 @@ public class Drone : Enemy, IDamageable
     [SerializeField]
     private int id = 0;
 
-    private Vector3 target = Vector3.zero;
     private SphereCollider radar = null;
 
     public int ID { get { return id; } }
@@ -39,7 +38,6 @@ public class Drone : Enemy, IDamageable
                 //
                 break;
             case EnemyState.Wandering:
-                //
                 Wander();
                 break;
             case EnemyState.Working:
@@ -51,26 +49,7 @@ public class Drone : Enemy, IDamageable
 
     protected override void PatrollingState()
     {
-        if(agent != null)
-        {
-            if(mState != MovementState.Operating)
-            {
-                mState = MovementState.Operating;
-                target = cortex.GetPatrolPosition();
-                MoveToTarget(target);
-            }
-            
-            if(mState == MovementState.Operating)
-            {
-                Vector3 distToTarget = target - transform.position;
-                distToTarget.y = 0;
-                float dist = distToTarget.magnitude;
-                if (dist < agent.stoppingDistance)
-                {
-                    mState = MovementState.IsReady;
-                }
-            }
-        }
+
     }
 
 
@@ -92,9 +71,14 @@ public class Drone : Enemy, IDamageable
         if(mineral && !mineral.IsScanned)
         {
             //Scanning 
-            StartCoroutine(ScanningMineral(mineral));
+            Scaninning(mineral);
         }
         else { return;}
+    }
+
+    private void Scaninning(Mineral mineral)
+    {
+        StartCoroutine(ScanningMineral(mineral));
     }
 
     IEnumerator ScanningMineral(Mineral mineral)

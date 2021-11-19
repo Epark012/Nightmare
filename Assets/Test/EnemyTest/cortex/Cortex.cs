@@ -36,6 +36,8 @@ public  class Cortex : MonoBehaviour
 
     }
 
+    public int MineralCountInCortex { get { return mineralInCortex.Count; } }
+
     public Vector3 GetPatrolPosition()
     {
         index = (index == mineralInCortex.Count - 1) ? 0 : index + 1;

@@ -643,13 +643,13 @@ Transform:
   m_GameObject: {fileID: 6168062064569226165}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 7769311329485263781}
   - {fileID: 9042840929331728962}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 74.83, z: 0}
 --- !u!95 &1015830185951574892
 Animator:
   serializedVersion: 3
@@ -686,6 +686,9 @@ MonoBehaviour:
   firePoint: {fileID: 1361422711582752175}
   shootingDistance: 10
   turretDamage: 3
+  aimingDuration: 3
+  state: 0
+  oState: 0
   missiles: []
 --- !u!1 &9042840929331728961
 GameObject:

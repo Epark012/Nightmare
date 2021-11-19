@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1823111580245324595}
   - component: {fileID: 746771844140324607}
   m_Layer: 0
-  m_Name: Turret_ShootTrail
+  m_Name: Drone_Guard_ShootingTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7b07ca667dca73469e9e4bf2cf7cd78, type: 2}
+  - {fileID: 2100000, guid: 25662d1e8f51d82488dbc18a620853d8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -71,10 +71,10 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.15
+  m_Time: 0.05
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.025
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:

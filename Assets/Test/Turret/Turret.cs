@@ -16,7 +16,7 @@ public enum TurretOperationState
     isOperating
 }
 
-public class Turret : MonoBehaviour
+public class Turret : MonoBehaviour, INightThriller
 {
     [Header("Turret Property")]
     [SerializeField]
@@ -32,6 +32,8 @@ public class Turret : MonoBehaviour
     [SerializeField]
     protected float aimingDuration = 3f;
     [SerializeField]
+    protected float targetingAngle = 15f;
+    [SerializeField]
     protected TurretState state = TurretState.Idle;
     [SerializeField]
     protected TurretOperationState oState = TurretOperationState.isWaiting;
@@ -45,7 +47,7 @@ public class Turret : MonoBehaviour
 
     protected virtual void Targeting(Transform target)
     {
-        if(oState == TurretOperationState.isWaiting)
+        if(oState == TurretOperationState.isWaiting && IsDetectingTarget())
         {
             StartCoroutine(Aiming(target, aimingDuration));
         }
@@ -83,6 +85,22 @@ public class Turret : MonoBehaviour
         else
             return false;
     }
+    
+    protected bool IsDetectingTarget()
+    {
+        return target != null;
+    }
+
+    protected void DetectTarget(Transform transform)
+    {
+        target = transform;
+        state = TurretState.Targeting;
+    }
+
+    protected void LostTarget()
+    {
+        target = null;
+    }
 
     protected virtual void Shooting()
     {
@@ -93,5 +111,10 @@ public class Turret : MonoBehaviour
     protected virtual void ShootVFX(Vector3 targetTransform)
     {
         
+    }
+
+    public void TakeDamageFromEnemy(float damage)
+    {
+        throw new NotImplementedException();
     }
 }

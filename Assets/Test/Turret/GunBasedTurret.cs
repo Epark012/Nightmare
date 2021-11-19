@@ -14,8 +14,6 @@ public class GunBasedTurret : Turret
     private TrailRenderer shootTrail = null;
     [SerializeField]
     private ParticleSystem muzzleFlash = null;
-    [SerializeField]
-    private float targetingAngle = 15f;
 
     //Testing Particle System
     [SerializeField]
@@ -56,8 +54,7 @@ public class GunBasedTurret : Turret
 
     private void Fire()
     {
-
-        if (oState == TurretOperationState.isWaiting && IsInRange(head,target,targetingAngle))
+        if (oState == TurretOperationState.isWaiting && IsInRange(head, target, targetingAngle))
         {
             animator.SetTrigger("Fire");
         }
@@ -116,10 +113,17 @@ public class GunBasedTurret : Turret
     private void OnTriggerEnter(Collider other)
     {
         //Detecting Target
+        var detectedTarget = other.GetComponent<IDamageable>();
+        if (detectedTarget != null)
+            DetectTarget(other.transform);
+        else
+            Debug.Log(other.gameObject.name + " has no IDamageable.");
     }
 
     private void OnTriggerExit(Collider other)
     {
         //Lost Target
+        if(IsDetectingTarget() && target == other.gameObject)
+            LostTarget();
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Porori : MonoBehaviour
+public class Porori : MonoBehaviour, INightThriller
 {
     [SerializeField]
     private float xSpeed, zSpeed, yOffset = 0.0f;
@@ -27,5 +27,10 @@ public class Porori : MonoBehaviour
         float z = Mathf.Sin(timer) * zSpeed;
         Vector3 pos = new Vector3(x, yOffset, z);
         transform.position = pos + centerPoint.position;
+    }
+
+    public void TakeDamageFromEnemy(float damage)
+    {
+        Debug.Log("Porori is under attack.");
     }
 }

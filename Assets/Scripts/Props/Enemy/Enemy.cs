@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
     protected NavMeshAgent agent = null;
 
     [SerializeField]
-    private float rotSpeed = 2f;
+    protected float rotSpeed = 2f;
     [SerializeField]
     private MeshRenderer meshObject;
     [SerializeField]
@@ -64,6 +64,9 @@ public class Enemy : MonoBehaviour
     protected Vector3 wanderTarget = Vector3.zero;
     protected Vector3 targetWorld = Vector3.zero;
     #endregion
+
+    [SerializeField]
+    protected Transform target = null;
 
     //Test
     public float angle;
@@ -118,7 +121,7 @@ public class Enemy : MonoBehaviour
     protected virtual void MoveToTarget(Vector3 target)
     {
         //Check Angle 
-         angle = Vector3.Angle(transform.forward, target);
+         angle = Mathf.Abs(Vector3.Angle(transform.forward, target));
 
         if(angle > angleOffset)
         {
@@ -138,8 +141,6 @@ public class Enemy : MonoBehaviour
     private IEnumerator SmoothRotate(Vector3 target)
     {
         agent.isStopped = true;
-
-        Debug.Log("sdfsfdsdffsdsdsfd");
         Quaternion targetRot = Quaternion.LookRotation(target);
 
         while (Vector3.Angle(transform.forward, target) > 1f)
@@ -165,27 +166,30 @@ public class Enemy : MonoBehaviour
 
         if (mState == MovementState.Moving)
         {
-            CalculateDistance(targetWorld);
+            IsTargetInDistance(targetWorld);
         }
     }
 
 
     private Vector3 SetTargetPosition()
     {
-        Vector3 targetWorld = CalculateTargetPosition();
+        targetWorld = CalculateTargetPosition();
 
         NavMeshPath path = new NavMeshPath();
         NavMesh.CalculatePath(transform.position, targetWorld, NavMesh.AllAreas, path);
+
         if (path.status != NavMeshPathStatus.PathComplete)
         {
             //Need to FIx 
-            SetTargetPosition();
+            Debug.Log("Path to TargetWold is not invalid, calcultate again");
+            //SetTargetPosition();
+            targetWorld = CalculateTargetPosition();
         }
 
         return targetWorld;
     }
 
-    private Vector3 CalculateTargetPosition()
+    protected Vector3 CalculateTargetPosition()
     {
         wanderTarget += new Vector3(Random.Range(-1f, 1f) * wanderDistance,
                                        0,
@@ -198,7 +202,7 @@ public class Enemy : MonoBehaviour
         return targetWorld;
     }
 
-    private bool CalculateDistance(Vector3 target)
+    protected bool IsTargetInDistance(Vector3 target)
     {
         Vector3 distToTarget = target - transform.position;
         distToTarget.y = 0;
@@ -219,7 +223,26 @@ public class Enemy : MonoBehaviour
 
     protected virtual void PatrollingState()
     {
+        if (agent != null)
+        {
+            if (mState != MovementState.Operating)
+            {
+                mState = MovementState.Operating;
+                target.position = cortex.GetPatrolPosition();
+                MoveToTarget(target.position);
+            }
 
+            if (mState == MovementState.Operating)
+            {
+                Vector3 distToTarget = target.position - transform.position;
+                distToTarget.y = 0;
+                float dist = distToTarget.magnitude;
+                if (dist < agent.stoppingDistance)
+                {
+                    mState = MovementState.IsReady;
+                }
+            }
+        }
     }
 
     protected virtual void AttackState()

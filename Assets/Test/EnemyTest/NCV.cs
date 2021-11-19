@@ -6,8 +6,6 @@ public class NCV : Enemy, IDamageable
     [SerializeField]
     private IKChainTargetSolver[] hands;
 
-    private Mineral target;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -32,9 +30,9 @@ public class NCV : Enemy, IDamageable
 
     private void WorkingOnMineral()
     {
+        Mineral target = cortex.GetTargetMineral();
         if(mState == MovementState.IsReady)
         {
-            target = cortex.GetTargetMineral();
             mState = MovementState.Moving;
             //Approach target mineral
             agent.SetDestination(target.transform.position);
