@@ -1,6 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+public enum TurretState
+{
+    Idle,
+    Targeting,
+    Shooting
+}
+
+public enum TurretOperationState
+{
+    isWaiting,
+    isOperating
+}
 
 public class Turret : MonoBehaviour
 {
@@ -15,28 +29,64 @@ public class Turret : MonoBehaviour
     protected float shootingDistance = 10f;
     [SerializeField]
     protected float turretDamage = 3f;
+    [SerializeField]
+    protected float aimingDuration = 3f;
+    [SerializeField]
+    protected TurretState state = TurretState.Idle;
+    [SerializeField]
+    protected TurretOperationState oState = TurretOperationState.isWaiting;
 
-    // Start is called before the first frame update
-    void Start()
+    protected Animator animator;
+
+    protected virtual void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void Targeting(Transform target)
     {
-        Targeting(target);
+        if(oState == TurretOperationState.isWaiting)
+        {
+            StartCoroutine(Aiming(target, aimingDuration));
+        }
     }
 
-    private void Targeting(Transform target)
+    private IEnumerator Aiming(Transform target, float duration)
     {
-        Vector3 targetPos = new Vector3(target.position.x, head.position.y, target.position.z);
-        head.LookAt(targetPos);
+        oState = TurretOperationState.isOperating;
+
+        float timer = 0f;
+
+        Quaternion startingRot = head.transform.rotation;
+        Quaternion targetRot = Quaternion.LookRotation(target.position - firePoint.transform.position);
+
+        while(timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            head.transform.rotation = Quaternion.Slerp(startingRot, targetRot, (timer / duration));
+            yield return null;
+        }
+        oState = TurretOperationState.isWaiting;
+        state = TurretState.Shooting;
+    }
+
+    protected bool IsInRange(Transform from, Transform to, float targetingAngle)
+    {
+        Vector3 targetDir = to.position - from.position;
+        float angleToTarget = Vector3.Angle(from.forward, targetDir);
+
+        if (angleToTarget < targetingAngle)
+        {
+            return true;
+        }
+        else
+            return false;
     }
 
     protected virtual void Shooting()
     {
-       
+        
     }
 
     //Trail Renderer for shoot range.

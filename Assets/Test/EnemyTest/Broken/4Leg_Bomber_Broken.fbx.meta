@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 09c2657cb36d3a04da9efe0083bfe63a
+guid: 6e44cc027c2277347b8e5d1cd36b20c2
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Drone_Heli
-    second: {fileID: 2100000, guid: 5d05e2d2486caf74da6892a2f7a3ba5f, type: 2}
+      name: 4Leg_Bomber
+    second: {fileID: 2100000, guid: 109afcab027361c48a4350817987ca90, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

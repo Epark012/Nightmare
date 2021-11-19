@@ -138,13 +138,13 @@ Transform:
   m_GameObject: {fileID: 3746659807642988940}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 3590494676174511180}
   - {fileID: 139506531616914092}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 162.52301, z: 0}
 --- !u!95 &5018051662723932204
 Animator:
   serializedVersion: 3
@@ -184,6 +184,7 @@ MonoBehaviour:
   shootTrail: {fileID: 746771844140324607, guid: 0081e549b59494743b578ecae1300f3e,
     type: 3}
   muzzleFlash: {fileID: 6047276296206678937}
+  particle: {fileID: 0}
 --- !u!1 &5369841340460362625
 GameObject:
   m_ObjectHideFlags: 0
