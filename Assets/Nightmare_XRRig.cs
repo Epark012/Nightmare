@@ -16,21 +16,43 @@ public class Nightmare_XRRig : XRRig
     [SerializeField]
     private float fadeDuration;
 
-    public void FadeScene()
+    public float FadeDuration { get { return fadeDuration; } }
+
+    protected void Start()
     {
-        StartCoroutine(FadeSceneIE(fadeDuration));
+        FadeInScreen();
     }
 
-    private IEnumerator FadeSceneIE(float duration)
+    public void FadeInScreen()
+    {
+        StartCoroutine(FadeIntoScene(fadeDuration));
+    }
+
+    public void FadeOutScreen()
+    {
+        StartCoroutine(FadeOutScene(fadeDuration));
+    }
+    private IEnumerator FadeOutScene(float duration)
     {
         fader.gameObject.SetActive(true);
-        
-        for(float t = 0; t < 1; t += Time.deltaTime/duration)
+        for (float t = 0; t < 1; t += Time.deltaTime / duration)
         {
+            Debug.Log("In FadeOut");
             fader.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, t));
             yield return null;
         }
 
+    }
+    private IEnumerator FadeIntoScene(float duration)
+    {
+        fader.gameObject.SetActive(true);
+        
+        for(float t = 1; t > 0; t -= Time.deltaTime/duration)
+        {
+            Debug.Log("In FadeIn");
+            fader.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, t));
+            yield return null;
+        }
         fader.gameObject.SetActive(false);
     }
 }

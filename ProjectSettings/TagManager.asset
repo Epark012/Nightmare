@@ -41,7 +41,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Detector
   - VRHead
   m_SortingLayers:
   - name: Default

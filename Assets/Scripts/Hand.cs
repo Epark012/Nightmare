@@ -48,7 +48,7 @@ public class Hand : XRDirectInteractor
         else
         {
             handPresence = controller.GetComponentInChildren<HandPresence>();
-            handPresence.TogglePhysics(true);
+            //handPresence.TogglePhysics(true);
         }
     }
 

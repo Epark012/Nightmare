@@ -9,25 +9,16 @@ using UnityEngine.Events;
 /// </summary>
 public class HeadDetector : MonoBehaviour
 {
+    private bool isCalled = false;
+
     public UnityEvent OnHeadSetOn;
-
-    [SerializeField]
-    private SpriteRenderer fader;
-
-    private void Awake()
-    {
-        fader.gameObject.SetActive(false);
-    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out NightmareHeadset headset))
+        if (other.gameObject.CompareTag("VRHead") && !isCalled)
         {
-            if(headset.IsHold)
-            {
-                Debug.Log(headset.gameObject.name + " is detected in OnTriggerEnter.");
-                OnHeadSetOn.Invoke();
-            }
+            OnHeadSetOn.Invoke();
+            isCalled = true;
         }
     }
 
@@ -35,6 +26,6 @@ public class HeadDetector : MonoBehaviour
     public void SceneTransition(int index)
     {
         //Fade and SceneTransition
-        NightmareSceneManagement.LoadScene(index, 1);
+        NightmareSceneManagement.Instance.LoadScene(index);
     }
 }

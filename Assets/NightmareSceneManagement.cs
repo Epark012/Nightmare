@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 /// <summary>
@@ -10,15 +11,29 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class NightmareSceneManagement : MonoBehaviour
 {
-    private static NightmareSceneManagement Instance;
+    public static int targetSceneIndex = 0;
+    private static int LoadingSceneIndex;
+    private AudioSource audioSource;
+    public static NightmareSceneManagement Instance;
+
+    [SerializeField]
     private Nightmare_XRRig xrRig;
 
     [Header("Scene Setting")]
     [SerializeField]
     private int loadingSceneIndex;
+    [SerializeField]
+    private float fadeDuration;
+    [SerializeField]
+    private AudioClip countDownClip;
+
+    public UnityEvent OnSceneTransition = null;
 
     private void Awake()
     {
+        LoadingSceneIndex = loadingSceneIndex;
+        audioSource = GetComponent<AudioSource>();
+
         if (Instance == null)
         {
             Instance = this;
@@ -37,29 +52,61 @@ public class NightmareSceneManagement : MonoBehaviour
         xrRig = FindObjectOfType<Nightmare_XRRig>();
     }
 
-   public static void LoadScene(int nextSceneIndex, float fadeDuration)
+    public void LoadScene(int nextSceneIndex)
     {
-        Instance.StartCoroutine(Instance.LoadSceneIE(nextSceneIndex, fadeDuration));
+
+        targetSceneIndex = nextSceneIndex;
+        Instance.StartCoroutine(Instance.LoadSceneIE(nextSceneIndex));
+
+        //Trigger OnSceneTransition Event
+        OnSceneTransition.Invoke();
     }
 
-    private IEnumerator LoadSceneIE(int NextSceneIndex, float fadeDuration)
+    public void onSceneTransition()
     {
-            //Fade Operation
-        if(xrRig != null)
+        audioSource.PlayOneShot(countDownClip);
+    }
+
+    private void CallFade()
+    {
+        if (xrRig != null)
         {
-            xrRig.FadeScene();
+            xrRig.FadeOutScreen();
         }
         else
         {
             SceneInit();
-            xrRig.FadeScene();
+            xrRig.FadeOutScreen();
         }
-        yield return new WaitForSeconds(fadeDuration);
-        
-        //Move to Loading Scene
-        NightmareLoadingSceneManager.SetSceneIndex(NextSceneIndex);
-        AsyncOperation ao = SceneManager.LoadSceneAsync(loadingSceneIndex);
-        while (!ao.isDone)
+    }
+
+    private IEnumerator LoadSceneIE(int NextSceneIndex)
+    {
+
+        AsyncOperation op = SceneManager.LoadSceneAsync(LoadingSceneIndex);
+        op.allowSceneActivation = false;
+
+
+        float timer = 0;
+
+       while(!op.isDone)
+        {
             yield return null;
+            timer += Time.deltaTime;
+
+            if(timer < 3.6f && !op.allowSceneActivation)
+            {
+                Debug.Log("Changing Scene.");
+            }
+            else
+            {
+                //Fade Operatio
+                CallFade();
+                yield return new WaitForSeconds(xrRig.FadeDuration);
+                op.allowSceneActivation = true;
+                yield break;
+            }
+        }
+        yield return null;
     }
 }

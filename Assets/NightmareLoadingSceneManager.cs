@@ -9,45 +9,62 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class NightmareLoadingSceneManager : MonoBehaviour
 {
-    static int nextSceneIndex = 0;
-
-    public static void SetSceneIndex(int SceneIndex)
-    {
-        nextSceneIndex = SceneIndex;
-        //ceneManager.LoadSceneAsync(nextSceneIndex);
-    }
+    [SerializeField]
+    private Nightmare_XRRig xRRig;
+    [SerializeField]
+    private int loadingSceneTime = 5;
 
     private void Start()
     {
-        StartCoroutine(LoadSceneIE());
+        if(xRRig == null)
+        {
+            SceneInIt();
+        }
+
+        StartCoroutine(ProcessLoadingScene());
     }
 
-    IEnumerator LoadSceneIE()
+    private void SceneInIt()
     {
-        AsyncOperation op = SceneManager.LoadSceneAsync(nextSceneIndex);
+        xRRig = FindObjectOfType<Nightmare_XRRig>();
+    }
+
+    IEnumerator ProcessLoadingScene()
+    {
+        AsyncOperation op = SceneManager.LoadSceneAsync(NightmareSceneManagement.targetSceneIndex);
         op.allowSceneActivation = false;
 
         float timer = 0f;
         while(!op.isDone)
         {
             yield return null;
-            timer += Time.deltaTime;
+
 
             if(op.progress < 0.9f)
             {
                 //
-                Debug.Log("nextSceneIndex : " + nextSceneIndex );
+                Debug.Log("nextSceneIndex : " + NightmareSceneManagement.targetSceneIndex);
             }
             else
             {
+                timer += Time.deltaTime;
                 //Last 10%
                 //Set condition to finish op.progress
-                if(timer>5.0f)
+                if(timer > loadingSceneTime)
                 {
-                    op.allowSceneActivation = true;
+                    StartCoroutine(LoadingNextScene(op));
                     yield break;
                 }
             }
         }
+    }
+
+    IEnumerator LoadingNextScene(AsyncOperation op)
+    {
+        xRRig.FadeOutScreen();
+
+        yield return new WaitForSeconds(xRRig.FadeDuration);
+
+        op.allowSceneActivation = true;
     }
 }

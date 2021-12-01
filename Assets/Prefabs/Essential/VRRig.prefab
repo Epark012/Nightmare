@@ -755,10 +755,10 @@ MonoBehaviour:
   m_CameraFloorOffsetObject: {fileID: 1841082616884931541}
   m_CameraGameObject: {fileID: 1841082617661067164}
   m_TrackingOriginMode: 2
-  m_TrackingSpace: 3
+  m_TrackingSpace: 1
   m_CameraYOffset: 1.36144
   fader: {fileID: 2465377325871943391}
-  fadeDuration: 1
+  fadeDuration: 3
 --- !u!1 &1841082617661067164
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,7 +859,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
+  m_RequiresDepthTextureOption: 1
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras: []
@@ -953,10 +953,9 @@ GameObject:
   - component: {fileID: 320910628915320429}
   - component: {fileID: 6313809096323987519}
   - component: {fileID: 7674691498947251714}
-  - component: {fileID: 8909995567148929989}
   m_Layer: 31
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: VRHead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1035,33 +1034,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8909995567148929989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5843773266746652903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2829c9c6d34154c4889e416fd2fd8594, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnHeadSetOn:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8909995567148929989}
-        m_MethodName: SceneTransition
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  fader: {fileID: 2465377325871943391}
 --- !u!1 &7011493950418620156
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,7 +1050,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8113154624074237363
 Transform:
   m_ObjectHideFlags: 0
@@ -1133,7 +1105,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1000
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0.9118601, b: 0.18396229, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1263,15 +1235,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52ff193d9e1abe04bad73a19a0b96592, type: 3}
---- !u!1 &5110628885611976806 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1531846070907867790, guid: 52ff193d9e1abe04bad73a19a0b96592,
-    type: 3}
-  m_PrefabInstance: {fileID: 6029946093985991400}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8494692206042122934 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2760030972075409502, guid: 52ff193d9e1abe04bad73a19a0b96592,
+--- !u!4 &1841082616884221005 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5341967231835037349, guid: 52ff193d9e1abe04bad73a19a0b96592,
     type: 3}
   m_PrefabInstance: {fileID: 6029946093985991400}
   m_PrefabAsset: {fileID: 0}
@@ -1281,9 +1247,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6029946093985991400}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1841082616884221005 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5341967231835037349, guid: 52ff193d9e1abe04bad73a19a0b96592,
+--- !u!1 &8494692206042122934 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2760030972075409502, guid: 52ff193d9e1abe04bad73a19a0b96592,
+    type: 3}
+  m_PrefabInstance: {fileID: 6029946093985991400}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5110628885611976806 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1531846070907867790, guid: 52ff193d9e1abe04bad73a19a0b96592,
     type: 3}
   m_PrefabInstance: {fileID: 6029946093985991400}
   m_PrefabAsset: {fileID: 0}
