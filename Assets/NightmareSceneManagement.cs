@@ -33,6 +33,8 @@ public class NightmareSceneManagement : MonoBehaviour
     {
         LoadingSceneIndex = loadingSceneIndex;
         audioSource = GetComponent<AudioSource>();
+        OnSceneTransition.AddListener(onSceneTransition);
+
 
         if (Instance == null)
         {
